@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=1200">
+<title>Brand — Carta Advisory</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 64px 80px; background: var(--gray-50); }
+  header { margin-bottom: 56px; max-width: 760px; }
+  header .eyebrow { margin-bottom: 18px; }
+  header h1 { margin-bottom: 16px; }
+  header p { color: var(--gray-600); font-size: 17px; line-height: 1.6; }
+  .block { margin-bottom: 72px; }
+  .block-title { display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px; border-bottom: 1px solid var(--gray-200); padding-bottom: 14px; }
+  .block-title h2 { font-family: var(--font-display); font-weight: 800; font-size: 28px; letter-spacing: -.02em; }
+  .block-title p { color: var(--gray-600); font-size: 14px; }
+
+  /* Wordmark lockups */
+  .marks { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .mark { border-radius: var(--r-card); padding: 64px 56px; display: flex; flex-direction: column; justify-content: space-between; min-height: 240px; }
+  .mark.light { background: var(--white); border: 1px solid var(--gray-200); color: var(--black); }
+  .mark.dark { background: var(--black); color: var(--white); }
+  .mark .wm { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 800; font-size: 22px; letter-spacing: -.01em; }
+  .mark .wm .dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; }
+  .mark .wm .thin { font-weight: 500; opacity: .55; }
+  .mark .foot { display: flex; justify-content: space-between; align-items: center; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; opacity: .55; }
+  .mark.dark .foot { color: var(--on-dark-50); }
+
+  /* Clear space */
+  .clear { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--r-card); padding: 64px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
+  .clear-demo { position: relative; padding: 48px; border: 1px dashed var(--gray-200); border-radius: 12px; }
+  .clear-demo::before, .clear-demo::after { content: ''; position: absolute; pointer-events: none; }
+  .clear-demo::before { inset: 24px; border: 1px dashed rgba(0,193,106,.6); border-radius: 6px; }
+  .clear-demo .wm { font-family: var(--font-display); font-weight: 800; font-size: 28px; letter-spacing: -.01em; display: inline-flex; align-items: center; gap: 10px; }
+  .clear-demo .wm .dot { width: 10px; height: 10px; background: var(--green); border-radius: 50%; }
+  .clear-demo .wm .thin { font-weight: 500; opacity: .55; }
+  .clear h3 { font-family: var(--font-display); font-weight: 700; font-size: 22px; margin-bottom: 12px; letter-spacing: -.01em; }
+  .clear p { color: var(--gray-600); font-size: 14px; line-height: 1.7; margin-bottom: 16px; }
+  .clear code { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; background: var(--gray-50); padding: 2px 6px; border-radius: 4px; }
+
+  /* Sizes */
+  .sizes { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--r-card); padding: 48px; display: flex; flex-direction: column; gap: 32px; }
+  .size-row { display: grid; grid-template-columns: 60px 1fr 200px; gap: 24px; align-items: center; padding-bottom: 24px; border-bottom: 1px solid var(--gray-100); }
+  .size-row:last-child { border-bottom: 0; padding-bottom: 0; }
+  .size-row .sz { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gray-400); }
+  .size-row .wm { font-family: var(--font-display); font-weight: 800; letter-spacing: -.01em; display: inline-flex; align-items: center; gap: 8px; }
+  .size-row .wm .dot { background: var(--green); border-radius: 50%; }
+  .size-row .wm .thin { font-weight: 500; opacity: .55; }
+  .size-row .use { font-size: 12px; color: var(--gray-600); line-height: 1.5; }
+
+  /* Photography — the portrait principle */
+  .photo { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .shot { background: var(--black); border-radius: var(--r-card); aspect-ratio: 4/5; padding: 48px; display: flex; align-items: flex-end; justify-content: center; position: relative; overflow: hidden; }
+  .shot::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 40%, var(--green-glow) 0%, rgba(0,193,106,.05) 40%, transparent 70%); filter: blur(24px); }
+  .shot-subject { width: 62%; aspect-ratio: 1; border-radius: 50%; background: linear-gradient(135deg,#1a1a1a,#2a2a2a); border: 2px solid var(--on-dark-12); position: relative; z-index: 1; filter: drop-shadow(0 20px 40px rgba(0,0,0,.5)); }
+  .shot-label { position: absolute; top: 24px; left: 24px; z-index: 2; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--green); }
+
+  .chart-shot { background: var(--black); border-radius: var(--r-card); aspect-ratio: 4/5; padding: 40px; position: relative; overflow: hidden; }
+  .chart-shot-label { position: absolute; top: 24px; left: 24px; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--green); }
+  .chart-shot .ticker { position: absolute; top: 24px; right: 24px; font-family: var(--font-display); font-weight: 700; color: var(--white); font-size: 14px; letter-spacing: -.01em; }
+  .chart-shot svg { width: 100%; height: 100%; }
+  .chart-shot .pivot { position: absolute; bottom: 40px; left: 40px; right: 40px; display: flex; justify-content: space-between; align-items: flex-end; color: var(--on-dark-60); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+  .chart-shot .pivot strong { color: var(--white); font-family: var(--font-display); font-size: 20px; letter-spacing: -.01em; font-weight: 700; display: block; margin-top: 4px; text-transform: none; }
+  .chart-shot .pivot .up { color: var(--green); }
+
+  /* Do / Don't */
+  .dodont { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .dd { border-radius: var(--r-card); padding: 40px; min-height: 260px; position: relative; }
+  .dd.do { background: var(--white); border: 1px solid var(--gray-200); }
+  .dd.dont { background: var(--gray-50); border: 1px solid var(--gray-200); }
+  .dd .tag { position: absolute; top: 20px; right: 20px; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; }
+  .dd.do .tag { background: var(--green); color: var(--black); }
+  .dd.dont .tag { background: var(--black); color: var(--white); }
+  .dd-demo { margin-top: 24px; margin-bottom: 24px; padding: 28px 24px; border-radius: 16px; background: var(--black); color: var(--white); font-family: var(--font-display); font-weight: 800; font-size: 24px; letter-spacing: -.02em; line-height: 1.1; }
+  .dd-demo.bad-gradient { background: linear-gradient(135deg, #00c16a, #0066ff, #aa00ff); }
+  .dd-demo.bad-green-fill { background: var(--green); color: var(--black); }
+  .dd-demo.bad-emoji::after { content: ' 🚀📈💰'; }
+  .dd-demo.bad-two-accents .alt { color: #ff8a8a; }
+  .dd p { color: var(--gray-600); font-size: 13px; line-height: 1.6; }
+
+  /* Voice samples */
+  .voice { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--r-card); padding: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .vcol h4 { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; margin-bottom: 20px; }
+  .vcol.on h4 { color: var(--green); }
+  .vcol.off h4 { color: var(--gray-400); }
+  .vq { padding: 20px 0; border-bottom: 1px solid var(--gray-100); }
+  .vq:last-child { border-bottom: 0; }
+  .vq .q { font-family: var(--font-display); font-weight: 700; font-size: 18px; letter-spacing: -.01em; line-height: 1.35; margin-bottom: 6px; }
+  .vcol.off .vq .q { text-decoration: line-through; text-decoration-color: var(--gray-400); color: var(--gray-400); }
+  .vq .why { font-size: 12px; color: var(--gray-600); }
+</style></head>
+<body>
+  <header>
+    <span class="t-eyebrow">08 · Brand</span>
+    <h1 class="t-display-2">The wordmark, the portrait, the <span class="t-accent">posture</span>.</h1>
+    <p>Carta Advisory's brand is composed of four things: the wordmark, the pulsing dot, the halo portrait, and the voice. Every surface in this system is an arrangement of those four.</p>
+  </header>
+
+  <section class="block">
+    <div class="block-title"><h2>Wordmark</h2><p>Syne 800 with a hairline 500 "Advisory". The green dot is part of the mark.</p></div>
+    <div class="marks">
+      <div class="mark light">
+        <div class="wm"><span class="dot"></span>Carta <span class="thin">Advisory</span></div>
+        <div class="foot"><span>Primary · on light</span><span>#0a0a0a</span></div>
+      </div>
+      <div class="mark dark">
+        <div class="wm"><span class="dot"></span>Carta <span class="thin">Advisory</span></div>
+        <div class="foot"><span>Primary · on dark</span><span>#ffffff</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-title"><h2>Clear space & construction</h2><p>The cap‑height of "C" defines the clear zone on all four sides.</p></div>
+    <div class="clear">
+      <div class="clear-demo">
+        <div class="wm"><span class="dot"></span>Carta <span class="thin">Advisory</span></div>
+      </div>
+      <div>
+        <h3>One unit of air, always.</h3>
+        <p>The minimum padding around the wordmark is <code>1 × cap-height of C</code> on all sides. The dot sits <code>10px</code> left of "Carta" at display size and scales proportionally.</p>
+        <p>Never lock the wordmark inside a pill, tag, or button. It stands alone, against either <code>#0a0a0a</code> or <code>#ffffff</code> — never a photo, gradient, or chromatic field.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-title"><h2>Size</h2><p>The dot never gets smaller than 6px. Below 14px display, drop "Advisory".</p></div>
+    <div class="sizes">
+      <div class="size-row">
+        <div class="sz">48 / XL</div>
+        <div class="wm" style="font-size:36px"><span class="dot" style="width:12px;height:12px"></span>Carta <span class="thin">Advisory</span></div>
+        <div class="use">Marketing hero nav, print covers.</div>
+      </div>
+      <div class="size-row">
+        <div class="sz">22 / L</div>
+        <div class="wm" style="font-size:22px"><span class="dot" style="width:8px;height:8px"></span>Carta <span class="thin">Advisory</span></div>
+        <div class="use">Marketing nav default, dispatch header.</div>
+      </div>
+      <div class="size-row">
+        <div class="sz">15 / M</div>
+        <div class="wm" style="font-size:15px"><span class="dot" style="width:6px;height:6px"></span>Carta <span class="thin">Advisory</span></div>
+        <div class="use">Reader app chrome, email footer.</div>
+      </div>
+      <div class="size-row">
+        <div class="sz">13 / S</div>
+        <div class="wm" style="font-size:13px;letter-spacing:.02em"><span class="dot" style="width:6px;height:6px"></span>Carta</div>
+        <div class="use">Favicons and chips — "Advisory" drops off below 14px.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-title"><h2>Photography</h2><p>Two types only: the anchor portrait, and green‑on‑black charts.</p></div>
+    <div class="photo">
+      <div class="shot">
+        <div class="shot-label">Portrait · halo + rim light</div>
+        <div class="shot-subject"></div>
+      </div>
+      <div class="chart-shot">
+        <div class="chart-shot-label">Chart imagery</div>
+        <div class="ticker">^SPX · 1Y</div>
+        <svg viewBox="0 0 400 400" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0" stop-color="#00c16a" stop-opacity=".28"/>
+              <stop offset="1" stop-color="#00c16a" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path d="M0,300 C40,290 70,260 100,240 S150,180 180,170 220,200 260,160 300,90 340,110 380,130 400,100 L400,400 L0,400 Z" fill="url(#g)"/>
+          <path d="M0,300 C40,290 70,260 100,240 S150,180 180,170 220,200 260,160 300,90 340,110 380,130 400,100" fill="none" stroke="#00c16a" stroke-width="2"/>
+          <circle cx="300" cy="90" r="4" fill="#00c16a"/>
+        </svg>
+        <div class="pivot">
+          <div>Pivot · Nov 2025<strong>+18.4%</strong></div>
+          <div style="text-align:right" class="up">52W high<strong style="color:var(--green)">5,783</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-title"><h2>Do / Don't</h2><p>The four violations that ruin the brand fastest.</p></div>
+    <div class="dodont">
+      <div class="dd do">
+        <span class="tag">Do</span>
+        <div class="dd-demo">We watch the <span style="color:var(--green)">10‑year</span>, not the 10‑second.</div>
+        <p>One green word, Syne display, black surface. This is the house style.</p>
+      </div>
+      <div class="dd dont">
+        <span class="tag">Don't</span>
+        <div class="dd-demo bad-gradient">We watch the 10‑year, not the 10‑second.</div>
+        <p>No chromatic gradients. The fintech gradient is the first thing to reject.</p>
+      </div>
+      <div class="dd dont">
+        <span class="tag">Don't</span>
+        <div class="dd-demo bad-green-fill">We watch the 10‑year, not the 10‑second.</div>
+        <p>Never fill a text block with green. Green is the accent, not the ground.</p>
+      </div>
+      <div class="dd dont">
+        <span class="tag">Don't</span>
+        <div class="dd-demo">Crush the market this quarter 🚀📈💰</div>
+        <p>No emoji, no hype verbs. This copy would get rewritten or killed.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-title"><h2>Voice — on brand / off brand</h2><p>How Tyler writes vs. how a generic fintech writes.</p></div>
+    <div class="voice">
+      <div class="vcol on">
+        <h4>→ On brand</h4>
+        <div class="vq"><div class="q">We watch the 10‑year, not the 10‑second.</div><div class="why">Specific, first‑person plural, no hype.</div></div>
+        <div class="vq"><div class="q">TLT closed −0.82%. We're adding into weakness, sized to 2%.</div><div class="why">Leads with a number, names the action and the size.</div></div>
+        <div class="vq"><div class="q">Read today's dispatch →</div><div class="why">Imperative verb + noun. No "Learn more."</div></div>
+        <div class="vq"><div class="q">Past performance is not indicative of future results.</div><div class="why">Disclosures are plain and present.</div></div>
+      </div>
+      <div class="vcol off">
+        <h4>✕ Off brand</h4>
+        <div class="vq"><div class="q">🚀 Crush the market this quarter!</div><div class="why">Emoji, hype verb, exclamation point.</div></div>
+        <div class="vq"><div class="q">Our proprietary algorithm unlocks guaranteed alpha.</div><div class="why">"Proprietary," "guaranteed," and no numbers.</div></div>
+        <div class="vq"><div class="q">Learn more about our amazing platform!</div><div class="why">"Learn more," "amazing," exclamation point.</div></div>
+        <div class="vq"><div class="q">Results may vary. Terms apply. See site.</div><div class="why">Vague legalese in place of real disclosure.</div></div>
+      </div>
+    </div>
+  </section>
+</body></html>

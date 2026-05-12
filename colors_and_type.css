@@ -1,0 +1,160 @@
+/* =========================================================================
+   CARTA ADVISORY — DESIGN TOKENS
+   A single source of truth for color & type. Import into any surface.
+   ========================================================================= */
+
+/* Syne (display) + Manrope (UI/body). These are the only two families. */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Manrope:wght@400;500;600;700&display=swap');
+
+:root {
+  /* ─── Core neutrals ─────────────────────────────────────────────────── */
+  /* Nothing is ever true #000 or true #fff. Ink is 10,10,10 — a warm black
+     that photographs well over green and does not vibrate on OLED. */
+  --black:     #0a0a0a;   /* primary surface, nav, dark sections */
+  --white:     #ffffff;   /* light surface, nav-CTA text, cards on dark */
+  --ink:       var(--black);
+  --surface:   var(--white);
+
+  /* Gray scale — warm, narrow, pulled from marketing site.
+     Only six steps; resist adding more. */
+  --gray-50:   #f9f9f9;   /* page background alt, trust bar */
+  --gray-100:  #f0f0f0;   /* subtle dividers on light */
+  --gray-200:  #e2e2e2;   /* input borders, pill borders */
+  --gray-400:  #999999;   /* label/eyebrow on light */
+  --gray-600:  #555555;   /* body muted */
+  --gray-800:  #222222;   /* near-ink text */
+
+  /* Dark-theme tints (applied ONLY on --black surfaces). These are
+     rgba layers on pure black, not their own swatches. */
+  --on-dark-100: rgba(255,255,255,0.92);   /* primary text on dark */
+  --on-dark-85:  rgba(255,255,255,0.85);   /* list-item body on dark */
+  --on-dark-60:  rgba(255,255,255,0.60);   /* secondary text on dark */
+  --on-dark-50:  rgba(255,255,255,0.50);   /* nav links, muted meta */
+  --on-dark-30:  rgba(255,255,255,0.30);   /* disabled */
+  --on-dark-12:  rgba(255,255,255,0.12);   /* ghost button border */
+  --on-dark-08:  rgba(255,255,255,0.08);   /* card border, divider */
+  --on-dark-05:  rgba(255,255,255,0.05);   /* card background (raised) */
+
+  /* Signal layers */
+  --card-dark:   #111111;                  /* card on black bg */
+
+  /* ─── The one accent ────────────────────────────────────────────────── */
+  /* Carta Advisory green. This is the only chromatic color in the system.
+     Reserve it for: CTAs, the eyebrow dot, the accent word in H1,
+     hero glow, check-marks, and one green word per dense page.
+     Never use it as a background fill behind body copy. */
+  --green:       #00c16a;  /* base */
+  --green-hover: #00e07a;  /* hover on CTA */
+  --green-dim:   #00a358;  /* pressed / focus ring under glow */
+  --green-glow:  rgba(0,193,106,0.25);  /* hero halo, drop-shadow */
+  --green-mist:  rgba(0,193,106,0.06);  /* section atmosphere only */
+
+  /* ─── Type families ─────────────────────────────────────────────────── */
+  /* Syne: display only. Never set at <20px or use for body copy.
+     Syne's authority comes from tight tracking + italic weight at size. */
+  --font-display: 'Syne', system-ui, serif;
+  /* Manrope: everything else. Labels, body, pills, nav, numerals. */
+  --font-body:    'Manrope', system-ui, sans-serif;
+
+  /* ─── Type scale ────────────────────────────────────────────────────── */
+  /* Headlines fluidly scale with viewport. Body does not. */
+  --fs-display-1: clamp(44px, 5.5vw, 72px);   /* hero H1 */
+  --fs-display-2: clamp(32px, 3.5vw, 52px);   /* section H2 */
+  --fs-display-3: 40px;                       /* card H1, checkout */
+  --fs-price:     56px;                       /* $-sized numerals */
+  --fs-lede:      18px;                       /* hero subhead */
+  --fs-body:      15px;                       /* default body */
+  --fs-meta:      14px;                       /* nav, secondary CTA */
+  --fs-cta:       15px;                       /* button label */
+  --fs-cta-sm:    13px;                       /* nav CTA */
+  --fs-label:     12px;                       /* caps labels, pills */
+  --fs-micro:     11px;                       /* section eyebrows */
+
+  /* Weights — Syne lives at 700/800; Manrope at 400/500/600/700. */
+  --fw-display:   800;
+  --fw-display-2: 700;
+  --fw-bold:      700;
+  --fw-semibold:  600;
+  --fw-medium:    500;
+  --fw-regular:   400;
+
+  /* Line height: tight for display, open for body. */
+  --lh-display-tight: 1.00;
+  --lh-display:       1.05;
+  --lh-body:          1.60;
+  --lh-body-open:     1.75;
+
+  /* Letter-spacing — headlines negative, caps labels positive. */
+  --ls-display:  -0.03em;
+  --ls-display-2:-0.02em;
+  --ls-caps:      0.12em;   /* section eyebrows */
+  --ls-caps-sm:   0.10em;   /* trust bar labels */
+  --ls-wide:      0.02em;   /* logo wordmark */
+  --ls-normal:    0;
+
+  /* ─── Radii ─────────────────────────────────────────────────────────── */
+  /* Two values do 90% of the work: 24px cards, 100px pills. */
+  --r-card:   24px;
+  --r-pill:   100px;
+  --r-input:  14px;
+  --r-tag:    999px;
+
+  /* ─── Shadows ───────────────────────────────────────────────────────── */
+  --shadow-lift: 0 20px 40px rgba(0,0,0,0.4);
+  --shadow-hero: 0 20px 40px rgba(0,0,0,0.4), 0 0 60px rgba(0,193,106,0.15);
+
+  /* ─── Nav / layout constants ────────────────────────────────────────── */
+  --nav-h:        68px;
+  --page-pad:     80px;
+  --page-pad-sm:  48px;
+  --page-max:     1200px;
+
+  /* ─── Motion ────────────────────────────────────────────────────────── */
+  --ease-out:     cubic-bezier(.2,.7,.2,1);
+  --dur-hover:    .2s;
+  --dur-lift:     .15s;
+}
+
+/* =========================================================================
+   RESET + BASE
+   ========================================================================= */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--ink);
+  background: var(--surface);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* =========================================================================
+   TYPE UTILITIES — use these instead of hand-rolling font-size/family
+   ========================================================================= */
+.t-display-1 { font-family: var(--font-display); font-weight: var(--fw-display);
+  font-size: var(--fs-display-1); line-height: var(--lh-display-tight);
+  letter-spacing: var(--ls-display); }
+.t-display-2 { font-family: var(--font-display); font-weight: var(--fw-display);
+  font-size: var(--fs-display-2); line-height: var(--lh-display);
+  letter-spacing: var(--ls-display); }
+.t-display-3 { font-family: var(--font-display); font-weight: var(--fw-display);
+  font-size: var(--fs-display-3); line-height: var(--lh-display);
+  letter-spacing: var(--ls-display-2); }
+.t-lede      { font-family: var(--font-body); font-weight: var(--fw-regular);
+  font-size: var(--fs-lede); line-height: var(--lh-body-open); }
+.t-body      { font-family: var(--font-body); font-weight: var(--fw-regular);
+  font-size: var(--fs-body); line-height: var(--lh-body); }
+.t-meta      { font-family: var(--font-body); font-weight: var(--fw-medium);
+  font-size: var(--fs-meta); }
+.t-eyebrow   { font-family: var(--font-body); font-weight: var(--fw-bold);
+  font-size: var(--fs-micro); letter-spacing: var(--ls-caps);
+  text-transform: uppercase; color: var(--green); }
+.t-label-caps{ font-family: var(--font-body); font-weight: var(--fw-semibold);
+  font-size: var(--fs-label); letter-spacing: var(--ls-caps-sm);
+  text-transform: uppercase; color: var(--gray-400); }
+.t-wordmark  { font-family: var(--font-display); font-weight: var(--fw-bold);
+  font-size: 15px; letter-spacing: var(--ls-wide); }
+
+/* Accent word — the green word inside an otherwise white headline. */
+.t-accent { color: var(--green); }

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=1200">
+<title>Spacing &amp; Radii — Carta Advisory</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 64px 80px; background: var(--gray-50); }
+  header { margin-bottom: 56px; max-width: 720px; }
+  header .eyebrow { margin-bottom: 18px; }
+  header h1 { margin-bottom: 16px; }
+  header p { color: var(--gray-600); font-size: 17px; line-height: 1.6; }
+  .block { margin-bottom: 72px; }
+  .block-title { display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px; border-bottom: 1px solid var(--gray-200); padding-bottom: 14px; }
+  .block-title h2 { font-family: var(--font-display); font-weight: 800; font-size: 28px; letter-spacing: -.02em; }
+  .block-title p { color: var(--gray-600); font-size: 14px; }
+
+  /* spacing */
+  .space-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+  .space { background: var(--white); border: 1px solid var(--gray-200); border-radius: 14px; padding: 20px; text-align: center; }
+  .space .bar { background: var(--green); height: 6px; border-radius: 3px; margin: 8px auto 14px; }
+  .space .n { font-weight: 700; font-size: 14px; margin-bottom: 2px; }
+  .space .u { font-size: 11px; color: var(--gray-400); letter-spacing: .08em; text-transform: uppercase; font-weight: 600; }
+
+  /* radii */
+  .radii { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .rad { background: var(--white); border: 1px solid var(--gray-200); padding: 28px; }
+  .rad .shape { height: 110px; background: var(--black); margin-bottom: 18px; display: flex; align-items: center; justify-content: center; color: var(--green); font-weight: 700; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; }
+  .rad.card { border-radius: var(--r-card); }
+  .rad.card .shape { border-radius: var(--r-card); }
+  .rad.pill { border-radius: var(--r-card); }
+  .rad.pill .shape { border-radius: var(--r-pill); }
+  .rad.input { border-radius: var(--r-card); }
+  .rad.input .shape { border-radius: var(--r-input); }
+  .rad.tag { border-radius: var(--r-card); }
+  .rad.tag .shape { border-radius: var(--r-tag); height: 44px; }
+  .rad .name { font-weight: 700; font-size: 15px; }
+  .rad .val  { font-size: 12px; color: var(--gray-600); font-variant-numeric: tabular-nums; margin: 2px 0 10px; }
+  .rad .use  { font-size: 12px; color: var(--gray-400); line-height: 1.5; }
+
+  /* elevation + layout diagram */
+  .layout { background: var(--black); border-radius: var(--r-card); padding: 24px; color: var(--white); }
+  .bar-nav { height: 36px; background: var(--on-dark-05); border: 1px dashed var(--on-dark-12); border-radius: 10px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; font-size: 11px; color: var(--on-dark-50); letter-spacing: .1em; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+  .tag-h { text-align: right; font-size: 10px; color: var(--green); letter-spacing: .1em; text-transform: uppercase; font-weight: 700; padding: 2px 4px; }
+  .canvas { border: 1px dashed var(--on-dark-12); border-radius: 14px; padding: 52px 60px; min-height: 340px; position: relative; }
+  .canvas .measure { position: absolute; font-size: 10px; color: var(--green); letter-spacing: .1em; text-transform: uppercase; font-weight: 700; }
+  .canvas .m-top { top: 12px; left: 50%; transform: translateX(-50%); }
+  .canvas .m-bot { bottom: 12px; left: 50%; transform: translateX(-50%); }
+  .canvas .m-lx  { left: 12px; top: 50%; transform: translateY(-50%) rotate(-90deg); }
+  .canvas .m-rx  { right: 12px; top: 50%; transform: translateY(-50%) rotate(90deg); }
+  .canvas .inner { background: var(--card-dark); border: 1px solid var(--on-dark-08); border-radius: var(--r-card); padding: 40px; }
+  .canvas h3 { font-family: var(--font-display); font-weight: 800; font-size: 36px; letter-spacing: -.02em; margin-bottom: 12px; }
+  .canvas p { color: var(--on-dark-60); font-size: 15px; line-height: 1.6; max-width: 480px; }
+
+  .shadows { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 24px; }
+  .sh { background: var(--black); border-radius: var(--r-card); padding: 48px; text-align: center; color: var(--white); }
+  .sh .halo-wrap { width: 220px; height: 220px; margin: 0 auto 28px; position: relative; display: flex; align-items: center; justify-content: center; }
+  .sh .halo-wrap::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle, var(--green-glow) 0%, rgba(0,193,106,0.08) 40%, transparent 70%); border-radius: 50%; filter: blur(20px); }
+  .sh .portrait { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg,#1a1a1a,#333); border: 2px solid var(--on-dark-12); position: relative; z-index: 1; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4)) drop-shadow(0 0 60px rgba(0,193,106,0.15)); }
+  .sh .name { font-weight: 700; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; color: var(--green); margin-bottom: 6px; }
+  .sh .desc { font-size: 13px; color: var(--on-dark-60); line-height: 1.6; max-width: 300px; margin: 0 auto; }
+  .sh .code { font-family: ui-monospace, Menlo, monospace; font-size: 11px; color: var(--on-dark-50); background: var(--on-dark-05); padding: 10px 14px; border-radius: 10px; margin-top: 16px; letter-spacing: .02em; }
+</style></head>
+<body>
+  <header>
+    <span class="t-eyebrow">03 · Spacing, radii &amp; elevation</span>
+    <h1 class="t-display-2">Two radii do 90% of the&nbsp;<span class="t-accent">work.</span></h1>
+    <p>The system uses 24px cards and 100px pills almost exclusively. Section rhythm is 100px of vertical padding on marketing, 80px horizontal gutters, capped at a 1200px content max. Elevation exists in exactly two places.</p>
+  </header>
+
+  <section class="block">
+    <div class="block-title"><h2>Spacing steps</h2><p>A restrained scale. Prefer a token to a fresh number.</p></div>
+    <div class="space-grid">
+      <div class="space"><div class="n">8</div><div class="u">gap / dot</div><div class="bar" style="width:8px"></div></div>
+      <div class="space"><div class="n">16</div><div class="u">tight gap</div><div class="bar" style="width:16px"></div></div>
+      <div class="space"><div class="n">24</div><div class="u">card radius · gap</div><div class="bar" style="width:24px"></div></div>
+      <div class="space"><div class="n">48</div><div class="u">nav gutter · card pad</div><div class="bar" style="width:48px"></div></div>
+      <div class="space"><div class="n">80</div><div class="u">page gutter</div><div class="bar" style="width:80px"></div></div>
+      <div class="space"><div class="n">100</div><div class="u">section rhythm</div><div class="bar" style="width:100px"></div></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-title"><h2>Radii</h2><p>Four radii, binary roles. No 4/6/8px rounded rectangles anywhere in the system.</p></div>
+    <div class="radii">
+      <div class="rad card"><div class="shape">24px card</div><div class="name">Card</div><div class="val">--r-card · 24px</div><div class="use">Feature cards, checkout card, hero image container.</div></div>
+      <div class="rad pill"><div class="shape">100px pill</div><div class="name">Pill</div><div class="val">--r-pill · 100px</div><div class="use">Every button, trust‑bar pill, nav CTA.</div></div>
+      <div class="rad input"><div class="shape">14px input</div><div class="name">Input</div><div class="val">--r-input · 14px</div><div class="use">Text fields, select menus, textareas.</div></div>
+      <div class="rad tag"><div class="shape">999 tag</div><div class="name">Tag</div><div class="val">--r-tag · 999px</div><div class="use">Inline chips, ticker badges, live dot wrappers.</div></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-title"><h2>Layout rhythm</h2><p>Fixed 68px nav, 100/80 section padding, 1200 max, 24px card on #111.</p></div>
+    <div class="layout">
+      <div class="bar-nav"><span>Nav · 68px</span><span>rgba(10,10,10,.96) · blur 12</span></div>
+      <div class="tag-h">↑ --nav-h</div>
+      <div class="canvas">
+        <span class="measure m-top">↑ 100 · section pad</span>
+        <span class="measure m-bot">↓ 100 · section pad</span>
+        <span class="measure m-lx">80 · gutter</span>
+        <span class="measure m-rx">80 · gutter</span>
+        <div class="inner">
+          <h3>Card on dark — 48px padding</h3>
+          <p>Cards sit on #111, not on the page black. A 1px rgba(255,255,255,.08) border is the only separation from the surface. Corner radius is always 24.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-title"><h2>Elevation</h2><p>Two recipes, full stop. The halo is a brand gesture, not a shadow.</p></div>
+    <div class="shadows">
+      <div class="sh">
+        <div class="halo-wrap"><div class="portrait"></div></div>
+        <div class="name">Hero portrait</div>
+        <div class="desc">Dual drop‑shadow + green halo. Reserved for the brand's one anchor image.</div>
+        <div class="code">drop-shadow(0 20px 40px rgba(0,0,0,.4)) drop-shadow(0 0 60px rgba(0,193,106,.15))</div>
+      </div>
+      <div class="sh" style="text-align:left;padding:48px">
+        <div style="background:var(--card-dark);border:1px solid var(--on-dark-08);border-radius:var(--r-card);padding:36px;min-height:220px">
+          <div style="font-family:var(--font-display);font-weight:800;font-size:24px;letter-spacing:-.02em;margin-bottom:8px">Raised card</div>
+          <div style="color:var(--on-dark-60);font-size:14px;line-height:1.6;margin-bottom:20px">On dark surfaces, a card is a 1px border on #111 — not a shadow. Light surfaces never cast shadows at all.</div>
+          <div style="display:inline-block;background:var(--green);color:var(--black);font-weight:700;font-size:13px;padding:10px 20px;border-radius:var(--r-pill)">CTA inside card</div>
+        </div>
+        <div class="code" style="text-align:left;margin-top:20px">background: #111 · border: 1px solid rgba(255,255,255,.08) · radius: 24</div>
+      </div>
+    </div>
+  </section>
+</body></html>

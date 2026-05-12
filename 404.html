@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Not Found — Tyler Ontiveros</title>
+<link rel="stylesheet" href="/colors_and_type.css">
+<style>
+  body { background: var(--black); color: var(--on-dark-100); min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-family: var(--font-body); padding: 40px; text-align: center; }
+  body::before { content: ''; position: absolute; width: 720px; height: 720px;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(0,193,106,.12) 0%, transparent 60%);
+    filter: blur(40px); pointer-events: none; z-index: 0; }
+  main { position: relative; z-index: 1; max-width: 540px; }
+  .eb { display: inline-flex; align-items: center; gap: 10px;
+    font-size: var(--fs-micro); font-weight: 700; letter-spacing: var(--ls-caps);
+    text-transform: uppercase; color: var(--green); margin-bottom: 24px; }
+  .pdot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity:1; transform:scale(1) } 50% { opacity:.55; transform:scale(1.3) } }
+  h1 { font-family: var(--font-display); font-weight: 800; font-size: 96px;
+    line-height: 1; letter-spacing: -.04em; color: var(--white); margin-bottom: 24px; }
+  h1 .accent { color: var(--green); font-style: italic; }
+  p { font-size: 17px; line-height: 1.7; color: var(--on-dark-60); margin-bottom: 36px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px;
+    padding: 16px 28px; border-radius: var(--r-pill);
+    background: var(--green); color: var(--black);
+    font-weight: 700; font-size: 14px; text-decoration: none;
+    transition: all .15s var(--ease-out); }
+  .btn:hover { background: var(--green-hover); transform: translateY(-1px); }
+</style></head>
+<body>
+<main>
+  <div class="eb"><span class="pdot"></span>404</div>
+  <h1>Page not<br><span class="accent">found.</span></h1>
+  <p>That link didn't lead anywhere. Head back to the homepage, or text me directly at (801) 821-7445 and I'll point you the right way.</p>
+  <a class="btn" href="/">← Back home</a>
+</main>
+</body></html>

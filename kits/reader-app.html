@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=1440">
+<title>Reader — Carta Advisory</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { background: var(--black); color: var(--on-dark-100); min-height: 100vh; display: grid; grid-template-columns: 260px 1fr; }
+  a { color: inherit; text-decoration: none; }
+
+  /* ─── Sidebar ─── */
+  .side { background: #070707; border-right: 1px solid var(--on-dark-08); padding: 24px 20px; display: flex; flex-direction: column; gap: 28px; position: sticky; top: 0; height: 100vh; overflow: auto; }
+  .wm { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 800; font-size: 16px; letter-spacing: -.01em; color: var(--white); padding: 0 8px; }
+  .wm .dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+  .wm .thin { font-weight: 500; opacity: .55; }
+  @keyframes pulse { 0%,100% { opacity:1; transform:scale(1) } 50% { opacity:.55; transform:scale(1.3) } }
+  @keyframes glow { 0%,100% { opacity:.85; transform: scale(1); } 50% { opacity:1; transform: scale(1.05); } }
+
+  .market-status { background: var(--card-dark); border: 1px solid var(--on-dark-08); border-radius: 14px; padding: 14px; }
+  .market-status .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .market-status .label { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--green); display: inline-flex; align-items: center; gap: 6px; }
+  .market-status .label .pdot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+  .market-status .time { font-size: 10px; color: var(--on-dark-50); font-variant-numeric: tabular-nums; }
+  .market-status .ticker-row { display: flex; justify-content: space-between; align-items: baseline; padding: 6px 0; border-top: 1px solid var(--on-dark-08); font-size: 12px; }
+  .market-status .ticker-row:first-of-type { border-top: 0; }
+  .market-status .tk { font-family: var(--font-display); font-weight: 700; color: var(--white); letter-spacing: -.01em; }
+  .market-status .val { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--white); }
+  .market-status .dx { font-size: 10px; font-variant-numeric: tabular-nums; font-weight: 600; }
+  .market-status .dx.up { color: var(--green); }
+  .market-status .dx.dn { color: #ff8a8a; }
+
+  .nav-group h5 { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--on-dark-30); padding: 0 8px 8px; }
+  .nav-group a { display: flex; align-items: center; gap: 12px; padding: 10px 8px; border-radius: 8px; color: var(--on-dark-60); font-size: 13px; font-weight: 500; transition: all .15s var(--ease-out); }
+  .nav-group a .ic { width: 16px; height: 16px; stroke-width: 1.5; stroke: currentColor; fill: none; }
+  .nav-group a:hover { color: var(--white); background: var(--on-dark-05); }
+  .nav-group a.active { color: var(--white); background: var(--on-dark-08); }
+  .nav-group a .meta { margin-left: auto; font-size: 10px; color: var(--on-dark-50); font-weight: 600; }
+  .nav-group a.active .meta { color: var(--green); }
+
+  .user { margin-top: auto; padding: 12px; display: flex; gap: 10px; align-items: center; border-top: 1px solid var(--on-dark-08); padding-top: 16px; }
+  .user .av { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg,#333,#555); }
+  .user .who { font-size: 12px; font-weight: 600; color: var(--white); }
+  .user .plan { font-size: 10px; color: var(--green); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+
+  /* ─── Main ─── */
+  .main { min-width: 0; }
+  .topbar { height: var(--nav-h); border-bottom: 1px solid var(--on-dark-08); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; position: sticky; top: 0; background: rgba(10,10,10,.96); backdrop-filter: blur(12px); z-index: 20; }
+  .topbar .breadcrumbs { font-size: 12px; color: var(--on-dark-50); }
+  .topbar .breadcrumbs strong { color: var(--white); font-weight: 600; }
+  .topbar-actions { display: flex; gap: 12px; align-items: center; }
+  .search { background: var(--card-dark); border: 1px solid var(--on-dark-08); border-radius: var(--r-pill); padding: 8px 14px 8px 36px; font-size: 12px; color: var(--on-dark-85); width: 240px; position: relative; }
+  .search::before { content: ''; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; border: 1.5px solid var(--on-dark-50); border-radius: 50%; }
+  .search::after { content: ''; position: absolute; left: 23px; top: 20px; width: 7px; height: 1.5px; background: var(--on-dark-50); transform: rotate(45deg); }
+  .btn-primary-sm { background: var(--green); color: var(--black); padding: 8px 14px; border-radius: var(--r-pill); font-size: 12px; font-weight: 700; border: 0; cursor: pointer; }
+  .btn-primary-sm:hover { background: var(--green-hover); }
+  .btn-ghost-sm { color: var(--on-dark-85); font-size: 12px; font-weight: 600; background: transparent; border: 1px solid var(--on-dark-08); border-radius: var(--r-pill); padding: 7px 14px; cursor: pointer; }
+  .btn-ghost-sm:hover { border-color: var(--on-dark-30); color: var(--white); }
+
+  /* Reading layout */
+  .article { max-width: 1080px; margin: 0 auto; padding: 48px 80px 120px; display: grid; grid-template-columns: 1fr 280px; gap: 64px; align-items: flex-start; }
+  .art-head { grid-column: 1 / -1; margin-bottom: 8px; }
+  .art-meta { display: flex; align-items: center; gap: 12px; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--green); margin-bottom: 28px; }
+  .art-meta .pdot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+  .art-meta .sep { color: var(--on-dark-30); }
+  .art-meta .muted { color: var(--on-dark-50); font-weight: 600; }
+  .art-head h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(36px, 4vw, 56px); line-height: 1.05; letter-spacing: -.03em; color: var(--white); max-width: 860px; margin-bottom: 24px; }
+  .art-head h1 .ac { color: var(--green); font-style: italic; }
+  .art-head .author { display: flex; gap: 14px; align-items: center; padding-top: 24px; border-top: 1px solid var(--on-dark-08); }
+  .art-head .av { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg,#333,#555); }
+  .art-head .author-txt { font-size: 13px; }
+  .art-head .author-txt .n { color: var(--white); font-weight: 600; }
+  .art-head .author-txt .d { color: var(--on-dark-50); margin-top: 2px; }
+
+  /* Body column */
+  .art-body { font-size: 17px; line-height: 1.75; color: var(--on-dark-85); }
+  .art-body p { margin-bottom: 24px; }
+  .art-body p .ac { color: var(--green); font-weight: 500; }
+  .art-body h2 { font-family: var(--font-display); font-weight: 800; font-size: 28px; letter-spacing: -.02em; color: var(--white); margin-top: 48px; margin-bottom: 20px; }
+  .art-body strong { color: var(--white); font-weight: 600; }
+  .art-body a { color: var(--green); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
+  .pullchart { background: var(--card-dark); border: 1px solid var(--on-dark-08); border-radius: var(--r-card); padding: 28px; margin: 32px -20px; }
+  .pullchart-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+  .pullchart-head .tk { font-family: var(--font-display); font-weight: 800; font-size: 15px; color: var(--white); }
+  .pullchart-head .sub { font-size: 11px; color: var(--on-dark-50); margin-top: 2px; font-weight: 500; }
+  .pullchart-head .px { font-family: var(--font-display); font-weight: 700; font-size: 22px; color: var(--white); letter-spacing: -.01em; text-align: right; font-variant-numeric: tabular-nums; }
+  .pullchart-head .dx { font-size: 12px; color: #ff8a8a; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .pullchart svg { width: 100%; height: 180px; display: block; margin-top: 8px; }
+  .pullchart-foot { display: flex; justify-content: space-between; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--on-dark-08); font-size: 11px; color: var(--on-dark-50); font-weight: 500; letter-spacing: .02em; }
+
+  .position-callout { background: var(--black); border: 1px solid var(--green); border-radius: 16px; padding: 24px 28px; margin: 32px -20px; display: grid; grid-template-columns: auto 1fr auto; gap: 28px; align-items: center; }
+  .position-callout .tag { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--green); }
+  .position-callout h4 { font-family: var(--font-display); font-weight: 700; font-size: 17px; color: var(--white); margin: 4px 0; letter-spacing: -.01em; }
+  .position-callout p { font-size: 12px; color: var(--on-dark-60); margin: 0; }
+  .position-callout .stat { text-align: right; }
+  .position-callout .stat .val { font-family: var(--font-display); font-weight: 800; font-size: 22px; color: var(--green); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+  .position-callout .stat .lab { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--on-dark-50); }
+
+  blockquote.pull { border-left: 2px solid var(--green); padding: 8px 0 8px 24px; margin: 32px 0; font-family: var(--font-display); font-weight: 700; font-size: 24px; color: var(--white); line-height: 1.35; letter-spacing: -.01em; }
+
+  /* Sidebar widgets */
+  .ride { position: sticky; top: 92px; display: flex; flex-direction: column; gap: 16px; }
+  .widget { background: var(--card-dark); border: 1px solid var(--on-dark-08); border-radius: 16px; padding: 20px; }
+  .widget h5 { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--on-dark-50); margin-bottom: 14px; }
+  .positions-list { display: flex; flex-direction: column; }
+  .pos-row { padding: 10px 0; border-top: 1px solid var(--on-dark-08); display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+  .pos-row:first-child { border-top: 0; padding-top: 0; }
+  .pos-row .l { display: flex; gap: 8px; align-items: center; }
+  .pos-row .sz { font-family: var(--font-display); font-weight: 700; color: var(--white); font-size: 13px; letter-spacing: -.01em; }
+  .pos-row .siz { font-size: 10px; color: var(--on-dark-50); font-weight: 500; }
+  .pos-row .dx { font-variant-numeric: tabular-nums; font-weight: 600; font-size: 12px; }
+  .pos-row .dx.up { color: var(--green); }
+  .pos-row .dx.dn { color: #ff8a8a; }
+  .pos-row .dx.flat { color: var(--on-dark-50); }
+
+  .alert { display: flex; gap: 10px; padding: 10px 0; border-top: 1px solid var(--on-dark-08); }
+  .alert:first-of-type { border-top: 0; padding-top: 0; }
+  .alert .pdot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; margin-top: 8px; flex-shrink: 0; }
+  .alert .txt { font-size: 12px; color: var(--on-dark-85); line-height: 1.5; }
+  .alert .txt strong { color: var(--white); font-weight: 600; }
+  .alert .tm { font-size: 10px; color: var(--on-dark-50); margin-top: 4px; font-variant-numeric: tabular-nums; }
+
+  /* Floating index return */
+  .idx-back { position: fixed; bottom: 20px; right: 20px; z-index: 100;
+    background: var(--card-dark); border: 1px solid var(--on-dark-12);
+    color: var(--on-dark-85); padding: 8px 14px; border-radius: var(--r-pill);
+    font-size: 11px; font-weight: 600; letter-spacing: .04em;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    transition: all .2s var(--ease-out); }
+  .idx-back:hover { border-color: var(--green); color: var(--white); }
+  .idx-back .pdot { width: 5px; height: 5px; background: var(--green); border-radius: 50%; }
+</style></head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="side">
+  <a class="wm" href="marketing.html"><span class="dot"></span>Carta <span class="thin">Advisory</span></a>
+
+  <div class="market-status">
+    <div class="top"><span class="label"><span class="pdot"></span>Market open</span><span class="time">14:32:08 ET</span></div>
+    <div class="ticker-row"><span class="tk">SPX</span><span><span class="val">5,783.44</span> <span class="dx up">+0.42%</span></span></div>
+    <div class="ticker-row"><span class="tk">NDX</span><span><span class="val">20,218.90</span> <span class="dx up">+0.68%</span></span></div>
+    <div class="ticker-row"><span class="tk">US10Y</span><span><span class="val">4.62%</span> <span class="dx dn">+3 bps</span></span></div>
+    <div class="ticker-row"><span class="tk">DXY</span><span><span class="val">104.82</span> <span class="dx flat">−0.05%</span></span></div>
+  </div>
+
+  <div class="nav-group">
+    <h5>Today</h5>
+    <a class="active" href="#"><svg class="ic" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M4 9h16"/></svg>Today's dispatch<span class="meta">NEW</span></a>
+    <a href="#"><svg class="ic" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>Archive</a>
+    <a href="#"><svg class="ic" viewBox="0 0 24 24"><path d="M4 19l6-6 4 4 6-8"/><path d="M14 9h6v6"/></svg>The book<span class="meta">+2.1%</span></a>
+    <a href="#"><svg class="ic" viewBox="0 0 24 24"><path d="M12 3a4 4 0 0 1 4 4v3a6 6 0 0 0 2 4H6a6 6 0 0 0 2-4V7a4 4 0 0 1 4-4z"/><path d="M10 18a2 2 0 0 0 4 0"/></svg>Alerts<span class="meta">3</span></a>
+  </div>
+  <div class="nav-group">
+    <h5>This week</h5>
+    <a href="#">Apr 17 · Weekly deep</a>
+    <a href="#">Apr 16 · Dispatch</a>
+    <a href="#">Apr 15 · Dispatch</a>
+  </div>
+
+  <div class="user">
+    <div class="av"></div>
+    <div><div class="who">Nora Finch</div><div class="plan">Starter</div></div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+  <div class="topbar">
+    <div class="breadcrumbs">Today's dispatch · <strong>Apr 20, 2026</strong></div>
+    <div class="topbar-actions">
+      <div class="search">Search archive, tickers…</div>
+      <button class="btn-ghost-sm">Listen · 6 min</button>
+      <button class="btn-primary-sm">Save →</button>
+    </div>
+  </div>
+
+  <article class="article">
+    <header class="art-head">
+      <div class="art-meta">
+        <span class="pdot"></span><span>Active · Apr 20, 2026</span>
+        <span class="sep">·</span><span class="muted">6 min read</span>
+        <span class="sep">·</span><span class="muted">Equities · Rates</span>
+      </div>
+      <h1>The long end is <span class="ac">finally</span> paying you to wait.</h1>
+      <div class="author">
+        <div class="av"></div>
+        <div class="author-txt"><div class="n">Tyler Ontiveros</div><div class="d">Published 7:15 AM ET · Updated 9:42 AM</div></div>
+      </div>
+    </header>
+
+    <div class="art-body">
+      <p><strong>TLT closed −0.82% yesterday</strong> after the 10‑year re‑tested 4.62%, and the long end of the curve is doing something it hasn't done since early 2024 — <span class="ac">paying you to wait.</span> That's the trade today.</p>
+
+      <p>We're adding duration. 2% of book, sized into weakness, with a hard stop below the March pivot at 88.90. This is a duration trade, not a call on the Fed. The distinction matters.</p>
+
+      <div class="pullchart">
+        <div class="pullchart-head">
+          <div><div class="tk">TLT</div><div class="sub">iShares 20+ Treasury · 1M intraday</div></div>
+          <div><div class="px">$92.14</div><div class="dx">−0.82% · −$0.76</div></div>
+        </div>
+        <svg viewBox="0 0 400 180" preserveAspectRatio="none">
+          <defs><linearGradient id="rg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#00c16a" stop-opacity=".28"/><stop offset="1" stop-color="#00c16a" stop-opacity="0"/></linearGradient></defs>
+          <path d="M0,50 C30,40 60,60 90,70 S130,100 160,90 200,60 240,80 290,130 330,110 360,80 400,100 L400,180 L0,180 Z" fill="url(#rg)"/>
+          <path d="M0,50 C30,40 60,60 90,70 S130,100 160,90 200,60 240,80 290,130 330,110 360,80 400,100" fill="none" stroke="#00c16a" stroke-width="2"/>
+          <circle cx="330" cy="110" r="4" fill="#00c16a"/>
+          <line x1="0" y1="130" x2="400" y2="130" stroke="rgba(255,255,255,.06)" stroke-dasharray="2 4"/>
+          <text x="8" y="125" fill="rgba(255,255,255,.3)" font-size="9" font-family="Manrope">March pivot · $88.90</text>
+        </svg>
+        <div class="pullchart-foot"><span>Apr 20, 11:42 ET · 15m delayed</span><span>Source · Polygon</span></div>
+      </div>
+
+      <p>Here's the thesis in four sentences. Real yields on the long end cleared 2.2% last week — <strong>the highest positive real carry on 20‑year paper since 2007.</strong> Growth is cooling at the edges (ISM services softened, continuing claims grinding up), but the Fed won't cut until it sees two more CPI prints under 2.5%. That's a window where duration gets paid, not punished. Size accordingly.</p>
+
+      <blockquote class="pull">The trade is duration exposure, not a bet on the Fed.</blockquote>
+
+      <h2>The risk I'm watching</h2>
+
+      <p>Supply. Treasury refunding lands May 4, and if the quarterly issuance tilts further toward the long end, the curve steepens on us and TLT re‑tests the March low. That's why the stop sits where it does — below the pivot, not at the pivot. If we break 88.90 with conviction, the thesis is wrong and we're out for −2%.</p>
+
+      <p>Second risk: oil. A move to $92 WTI resets the inflation picture in a week and the Fed speak shifts hawkish. Watch <a href="#">USO and the 6‑month calendar spread</a> — the market tells you before the data does.</p>
+
+      <div class="position-callout">
+        <div><div class="tag">Position change</div><h4>Long TLT · 2.00% book weight</h4><p>Entry VWAP $92.18 · Stop $88.90 · Target $98.60</p></div>
+        <div></div>
+        <div class="stat"><div class="val">+0.42%</div><div class="lab">Intraday P&L</div></div>
+      </div>
+
+      <p>We watch the 10‑year, not the 10‑second. See you tomorrow at 7:15.</p>
+    </div>
+
+    <!-- Rail -->
+    <aside class="ride">
+      <div class="widget">
+        <h5>Active positions · 12</h5>
+        <div class="positions-list">
+          <div class="pos-row"><div class="l"><div><div class="sz">TLT</div><div class="siz">2.0% · NEW</div></div></div><span class="dx up">+0.42%</span></div>
+          <div class="pos-row"><div class="l"><div><div class="sz">SMCI</div><div class="siz">3.5%</div></div></div><span class="dx up">+1.84%</span></div>
+          <div class="pos-row"><div class="l"><div><div class="sz">CAT</div><div class="siz">2.2%</div></div></div><span class="dx dn">−0.68%</span></div>
+          <div class="pos-row"><div class="l"><div><div class="sz">XLE</div><div class="siz">4.0%</div></div></div><span class="dx up">+0.91%</span></div>
+          <div class="pos-row"><div class="l"><div><div class="sz">GLD</div><div class="siz">1.5%</div></div></div><span class="dx flat">+0.04%</span></div>
+          <div class="pos-row"><div class="l"><div><div class="sz">MSFT</div><div class="siz">3.0%</div></div></div><span class="dx up">+0.72%</span></div>
+        </div>
+      </div>
+
+      <div class="widget">
+        <h5>Recent alerts</h5>
+        <div class="alert"><span class="pdot"></span><div class="txt"><strong>Added TLT</strong> · 2% book weight at $92.18 VWAP. Stop $88.90.<div class="tm">7:41 AM ET</div></div></div>
+        <div class="alert"><span class="pdot"></span><div class="txt"><strong>Trimmed SMCI</strong> · 50 bps into strength. Now 3.5%.<div class="tm">Apr 18 · 2:18 PM ET</div></div></div>
+        <div class="alert"><span class="pdot"></span><div class="txt"><strong>Exited BA</strong> · Stop hit at $168.40. Loss −1.1% of book.<div class="tm">Apr 17 · 10:02 AM ET</div></div></div>
+      </div>
+
+      <div class="widget">
+        <h5>Coming up</h5>
+        <div class="alert"><div class="txt"><strong>Weekly deep</strong> · Apr 24, Fri<div class="tm">Rates at the long end</div></div></div>
+        <div class="alert"><div class="txt"><strong>Q&A thread</strong> · Sun 11 AM ET<div class="tm">Ask before 10 AM</div></div></div>
+      </div>
+    </aside>
+  </article>
+</main>
+
+<a class="idx-back" href="../index.html"><span class="pdot"></span>Design system index</a>
+
+</body></html>

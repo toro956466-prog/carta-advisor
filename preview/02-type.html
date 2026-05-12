@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=1200">
+<title>Typography — Carta Advisory</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 64px 80px; background: var(--gray-50); }
+  header { margin-bottom: 56px; max-width: 720px; }
+  header .eyebrow { margin-bottom: 18px; }
+  header h1 { margin-bottom: 16px; }
+  header p { color: var(--gray-600); font-size: 17px; line-height: 1.6; }
+  .block { margin-bottom: 72px; }
+  .block-title { display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px; border-bottom: 1px solid var(--gray-200); padding-bottom: 14px; }
+  .block-title h2 { font-family: var(--font-display); font-weight: 800; font-size: 28px; letter-spacing: -.02em; }
+  .block-title p { color: var(--gray-600); font-size: 14px; }
+  .family { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .fam-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--r-card); padding: 40px; }
+  .fam-card .title { font-family: var(--font-display); font-weight: 800; font-size: 56px; letter-spacing: -.03em; line-height: 1; margin-bottom: 4px; }
+  .fam-card .sub { font-size: 13px; color: var(--gray-400); text-transform: uppercase; letter-spacing: .12em; font-weight: 600; margin-bottom: 28px; }
+  .fam-card .role { color: var(--gray-600); font-size: 14px; line-height: 1.7; margin-bottom: 24px; }
+  .specimen { border-top: 1px solid var(--gray-200); padding-top: 20px; }
+  .sp-row { display: flex; align-items: baseline; gap: 16px; padding: 8px 0; border-bottom: 1px dashed var(--gray-100); }
+  .sp-row:last-child { border-bottom: none; }
+  .sp-row .w { width: 60px; font-size: 11px; color: var(--gray-400); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; flex-shrink:0; }
+  .sp-row .s { flex: 1; }
+  .manrope .w { font-family: var(--font-body); }
+
+  .scale { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--r-card); padding: 48px; }
+  .scale-row { display: grid; grid-template-columns: 160px 1fr 180px; align-items: baseline; gap: 24px; padding: 18px 0; border-bottom: 1px dashed var(--gray-200); }
+  .scale-row:last-child { border-bottom: none; }
+  .scale-row .tag { font-size: 11px; color: var(--gray-400); letter-spacing: .1em; text-transform: uppercase; font-weight: 700; font-family: var(--font-body); }
+  .scale-row .specs { font-size: 12px; color: var(--gray-600); font-family: var(--font-body); text-align: right; font-variant-numeric: tabular-nums; }
+
+  .rhythm { background: var(--black); color: var(--white); border-radius: var(--r-card); padding: 64px; }
+  .rhythm .t-eyebrow { margin-bottom: 20px; display: inline-flex; align-items: center; gap: 10px; }
+  .rhythm .dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; }
+  .rhythm h1 { font-family: var(--font-display); font-weight: 800; font-size: 56px; line-height: 1; letter-spacing: -.03em; margin-bottom: 24px; max-width: 780px; }
+  .rhythm h1 em { font-style: normal; color: var(--green); }
+  .rhythm .lede { font-size: 18px; line-height: 1.75; color: var(--on-dark-60); max-width: 560px; margin-bottom: 36px; }
+  .rhythm .byline { font-size: 13px; color: var(--on-dark-50); letter-spacing: .02em; padding-top: 20px; border-top: 1px solid var(--on-dark-08); display: flex; gap: 14px; font-variant-numeric: tabular-nums; }
+  .rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+  .rule { background: var(--white); border: 1px solid var(--gray-200); border-radius: 14px; padding: 20px 22px; font-size: 13px; color: var(--gray-800); line-height: 1.6; }
+  .rule strong { display:block; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--green); margin-bottom: 8px; font-weight: 700; }
+</style></head>
+<body>
+  <header>
+    <span class="t-eyebrow">02 · Typography</span>
+    <h1 class="t-display-2">Two families, used with&nbsp;<span class="t-accent">discipline.</span></h1>
+    <p>Syne carries the display work; Manrope carries everything else. Headlines get tight negative tracking, caps labels get open positive tracking, body stays at 15/1.6. Never use Syne below 20px or for body copy.</p>
+  </header>
+
+  <section class="block">
+    <div class="block-title"><h2>Families</h2><p>Two is the cap. Never introduce a third.</p></div>
+    <div class="family">
+      <div class="fam-card">
+        <div class="title">Syne</div>
+        <div class="sub">Display · 700 / 800</div>
+        <div class="role">Display only — headlines, prices, the wordmark. Syne earns its authority from tight tracking at size. Never set below 20px, never as running body copy.</div>
+        <div class="specimen">
+          <div class="sp-row"><span class="w">800 / 72</span><span class="s" style="font-family:var(--font-display);font-weight:800;font-size:48px;line-height:1;letter-spacing:-.03em">Quiet authority Aa</span></div>
+          <div class="sp-row"><span class="w">800 / 32</span><span class="s" style="font-family:var(--font-display);font-weight:800;font-size:32px;letter-spacing:-.03em">The ten‑year, not the ten‑second</span></div>
+          <div class="sp-row"><span class="w">700 / 22</span><span class="s" style="font-family:var(--font-display);font-weight:700;font-size:22px;letter-spacing:-.02em">AaBbCc 0123456789 · &amp;?!</span></div>
+        </div>
+      </div>
+      <div class="fam-card manrope">
+        <div class="title" style="font-family:var(--font-body);font-weight:700;letter-spacing:-.02em">Manrope</div>
+        <div class="sub">Body · 400 / 500 / 600 / 700</div>
+        <div class="role">Everything else. Body, nav, pills, labels, forms, numerals. Manrope's wide x‑height reads well at 12–15px and its tabular figures line up under equity tickers.</div>
+        <div class="specimen">
+          <div class="sp-row"><span class="w">400 / 15</span><span class="s" style="font-weight:400;font-size:15px;line-height:1.6">A sober read on a loud market, delivered at 6 a.m.</span></div>
+          <div class="sp-row"><span class="w">500 / 14</span><span class="s" style="font-weight:500;font-size:14px">Read today's dispatch →</span></div>
+          <div class="sp-row"><span class="w">600 / 12</span><span class="s" style="font-weight:600;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-400)">Featured in Bloomberg · CNBC · WSJ</span></div>
+          <div class="sp-row"><span class="w">700 / 15</span><span class="s" style="font-weight:700;font-size:15px">Start the trial</span></div>
+          <div class="sp-row"><span class="w">TAB</span><span class="s" style="font-weight:500;font-size:15px;font-variant-numeric:tabular-nums">AAPL +2.14% · TLT −0.82% · ^VIX 14.3</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-title"><h2>Scale</h2><p>One scale for every surface. Headlines scale fluidly with clamp().</p></div>
+    <div class="scale">
+      <div class="scale-row"><span class="tag">Display 1</span><span style="font-family:var(--font-display);font-weight:800;font-size:72px;line-height:1;letter-spacing:-.03em">Quiet in a loud market</span><span class="specs">Syne 800 · 72px · clamp(44,5.5vw,72) · −.03em · 1.00</span></div>
+      <div class="scale-row"><span class="tag">Display 2</span><span style="font-family:var(--font-display);font-weight:800;font-size:52px;line-height:1.05;letter-spacing:-.03em">Section headlines</span><span class="specs">Syne 800 · 52px · clamp(32,3.5vw,52) · −.03em · 1.05</span></div>
+      <div class="scale-row"><span class="tag">Display 3</span><span style="font-family:var(--font-display);font-weight:800;font-size:40px;line-height:1.05;letter-spacing:-.02em">Card &amp; checkout titles</span><span class="specs">Syne 800 · 40px · −.02em · 1.05</span></div>
+      <div class="scale-row"><span class="tag">Price</span><span style="font-family:var(--font-display);font-weight:800;font-size:56px;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums">$29<span style="font-family:var(--font-body);font-size:18px;font-weight:500;color:var(--gray-400)"> /mo</span></span><span class="specs">Syne 800 · 56px · tabular · −.03em</span></div>
+      <div class="scale-row"><span class="tag">Lede</span><span style="font-size:18px;line-height:1.75">Market intelligence written like a portfolio manager briefing a room.</span><span class="specs">Manrope 400 · 18px · 1.75 · max 440px</span></div>
+      <div class="scale-row"><span class="tag">Body</span><span style="font-size:15px;line-height:1.6">Default body copy sits here. Fifteen on sixteen‑tenths is the house baseline.</span><span class="specs">Manrope 400 · 15px · 1.6</span></div>
+      <div class="scale-row"><span class="tag">Meta / Nav</span><span style="font-size:14px;font-weight:500">Dispatch · Desk · Archive · Subscribe</span><span class="specs">Manrope 500 · 14px</span></div>
+      <div class="scale-row"><span class="tag">CTA label</span><span style="font-size:15px;font-weight:700">Start the trial →</span><span class="specs">Manrope 700 · 15px · 13px in nav</span></div>
+      <div class="scale-row"><span class="tag">Eyebrow</span><span class="t-eyebrow">Today · Apr 20, 2026</span><span class="specs">Manrope 700 · 11px · +.12em caps · green</span></div>
+      <div class="scale-row"><span class="tag">Caps label</span><span class="t-label-caps">As seen in</span><span class="specs">Manrope 600 · 12px · +.10em caps · gray‑400</span></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-title"><h2>Rhythm in context</h2><p>All the scale rules, landed on one surface.</p></div>
+    <div class="rhythm">
+      <span class="t-eyebrow"><span class="dot"></span>Today · Apr 20, 2026</span>
+      <h1>A sober read on a loud market, <em>before the open.</em></h1>
+      <p class="lede">Market intelligence written like a portfolio manager briefing a room of smart non‑professionals. Daily at 6 a.m. Eastern, in your inbox.</p>
+      <div class="byline"><span>Tyler Ontiveros</span><span>·</span><span>Issue 412</span><span>·</span><span>6 min read</span></div>
+    </div>
+    <div class="rules">
+      <div class="rule"><strong>Pairing</strong>Syne headline above Manrope lede. Never invert the roles, never set Syne as running paragraph.</div>
+      <div class="rule"><strong>Accent</strong>One green word per hero, never two. The accent is a seasoning, not a color field.</div>
+      <div class="rule"><strong>Numerals</strong>Any price, ticker, or stat uses <code style="font-family:var(--font-body);background:var(--gray-100);padding:1px 6px;border-radius:4px;font-size:12px">font-variant-numeric: tabular-nums</code>.</div>
+    </div>
+  </section>
+</body></html>

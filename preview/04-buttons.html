@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=1200">
+<title>Buttons — Carta Advisory</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 64px 80px; background: var(--gray-50); }
+  header { margin-bottom: 56px; max-width: 720px; }
+  header .eyebrow { margin-bottom: 18px; }
+  header h1 { margin-bottom: 16px; }
+  header p { color: var(--gray-600); font-size: 17px; line-height: 1.6; }
+  .block { margin-bottom: 72px; }
+  .block-title { display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px; border-bottom: 1px solid var(--gray-200); padding-bottom: 14px; }
+  .block-title h2 { font-family: var(--font-display); font-weight: 800; font-size: 28px; letter-spacing: -.02em; }
+  .block-title p { color: var(--gray-600); font-size: 14px; }
+
+  .row { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .surface { border-radius: var(--r-card); padding: 48px; margin-bottom: 20px; }
+  .surface.dark { background: var(--black); }
+  .surface.light { background: var(--white); border: 1px solid var(--gray-200); }
+  .surface .label { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; margin-bottom: 28px; }
+  .surface.dark .label { color: var(--on-dark-50); }
+  .surface.light .label { color: var(--gray-400); }
+
+  /* Button recipes */
+  .btn { font-family: var(--font-body); display: inline-flex; align-items: center; gap: 8px; text-decoration: none; border: 0; cursor: pointer; transition: background .2s, color .2s, transform .15s, border-color .2s; white-space: nowrap; }
+  .btn-green { background: var(--green); color: var(--black); font-weight: 700; font-size: 15px; padding: 16px 32px; border-radius: var(--r-pill); }
+  .btn-green:hover { background: var(--green-hover); transform: translateY(-2px); }
+  .btn-green.sm { font-size: 13px; padding: 10px 22px; }
+  .btn-ghost-dark { color: var(--on-dark-60); font-size: 15px; font-weight: 500; padding: 16px 28px; border-radius: var(--r-pill); border: 1px solid var(--on-dark-12); }
+  .btn-ghost-dark:hover { color: var(--white); border-color: var(--on-dark-30); }
+  .btn-ghost-light { color: var(--gray-600); font-size: 15px; font-weight: 500; padding: 16px 28px; border-radius: var(--r-pill); border: 1px solid var(--gray-200); }
+  .btn-ghost-light:hover { color: var(--black); border-color: var(--gray-400); }
+  .btn-link-dark { color: var(--on-dark-50); font-size: 14px; font-weight: 500; padding: 8px 0; }
+  .btn-link-dark:hover { color: var(--white); }
+  .btn-link-light { color: var(--gray-600); font-size: 14px; font-weight: 500; padding: 8px 0; }
+  .btn-link-light:hover { color: var(--black); }
+  .btn-disabled { background: var(--on-dark-08); color: var(--on-dark-30); font-weight: 700; font-size: 15px; padding: 16px 32px; border-radius: var(--r-pill); cursor: not-allowed; }
+  .btn-block { width: 100%; justify-content: center; padding: 18px; font-size: 16px; font-weight: 700; border-radius: var(--r-pill); background: var(--green); color: var(--black); }
+
+  .specs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 28px; }
+  .spec { background: var(--white); border: 1px solid var(--gray-200); border-radius: 14px; padding: 18px 22px; font-size: 13px; color: var(--gray-800); line-height: 1.6; }
+  .spec strong { display: block; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--green); margin-bottom: 6px; font-weight: 700; }
+  .spec code { font-family: ui-monospace, Menlo, monospace; background: var(--gray-100); padding: 1px 6px; border-radius: 4px; font-size: 12px; }
+</style></head>
+<body>
+  <header>
+    <span class="t-eyebrow">04 · Buttons</span>
+    <h1 class="t-display-2">Every button is a&nbsp;<span class="t-accent">pill.</span></h1>
+    <p>One primary: green fill, black label. One ghost: transparent with a 1px border, tuned to its surface. Link buttons for tertiary moves. No pastel secondaries, no gradient fills, no square corners anywhere.</p>
+  </header>
+
+  <section class="block">
+    <div class="block-title"><h2>Primary · ghost · link</h2><p>On dark (top) and light (bottom). Both use the same green CTA.</p></div>
+
+    <div class="surface dark">
+      <div class="label">On #0A0A0A — marketing hero, checkout, reader app</div>
+      <div class="row">
+        <a class="btn btn-green" href="#">Start the trial <span>→</span></a>
+        <a class="btn btn-green sm" href="#">Subscribe</a>
+        <a class="btn btn-ghost-dark" href="#">Read a sample</a>
+        <a class="btn btn-link-dark" href="#">Learn more →</a>
+        <span class="btn btn-disabled">Processing…</span>
+      </div>
+    </div>
+
+    <div class="surface light">
+      <div class="label">On #FFFFFF — mid-page sections, account settings</div>
+      <div class="row">
+        <a class="btn btn-green" href="#">Start the trial <span>→</span></a>
+        <a class="btn btn-green sm" href="#">Subscribe</a>
+        <a class="btn btn-ghost-light" href="#">Read a sample</a>
+        <a class="btn btn-link-light" href="#">See all dispatches →</a>
+      </div>
+    </div>
+
+    <div class="specs">
+      <div class="spec"><strong>Sizing</strong>Default: <code>16px 32px</code>, 15/700. Nav/sm: <code>10px 22px</code>, 13/700. Block: <code>18px</code>, 16/700, 100% width. Hit target ≥ 44px.</div>
+      <div class="spec"><strong>Radius</strong>Always <code>var(--r-pill)</code> / 100px. No button in the system uses a different radius.</div>
+      <div class="spec"><strong>Hover</strong>Primary: bg → <code>#00E07A</code> + <code>translateY(-2px)</code>. Ghost: border &amp; text step toward surface ink. 200ms ease.</div>
+      <div class="spec"><strong>Content</strong>Imperative verb + noun. Optional trailing <code>→</code> for forward-direction. Never "Click here" or "Learn more" alone.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-title"><h2>Block CTA</h2><p>Used inside checkout card &amp; form submissions — one per surface.</p></div>
+    <div class="surface dark" style="max-width:520px;padding:40px">
+      <a class="btn btn-block" href="#">Subscribe to Active — $29/mo</a>
+      <a class="btn btn-link-dark" href="#" style="display:block;text-align:center;margin-top:14px">Maybe later</a>
+    </div>
+  </section>
+</body></html>

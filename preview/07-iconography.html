@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=1200">
+<title>Iconography — Carta Advisory</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 64px 80px; background: var(--gray-50); }
+  header { margin-bottom: 56px; max-width: 760px; }
+  header .eyebrow { margin-bottom: 18px; }
+  header h1 { margin-bottom: 16px; }
+  header p { color: var(--gray-600); font-size: 17px; line-height: 1.6; }
+  .block { margin-bottom: 72px; }
+  .block-title { display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px; border-bottom: 1px solid var(--gray-200); padding-bottom: 14px; }
+  .block-title h2 { font-family: var(--font-display); font-weight: 800; font-size: 28px; letter-spacing: -.02em; }
+  .block-title p { color: var(--gray-600); font-size: 14px; }
+
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .tile { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--r-card); padding: 28px; text-align: center; }
+  .tile .gl { font-size: 56px; font-family: var(--font-body); line-height: 1; margin-bottom: 16px; color: var(--black); font-variant-numeric: tabular-nums; }
+  .tile .gl.green { color: var(--green); }
+  .tile .name { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+  .tile .use { font-size: 12px; color: var(--gray-600); line-height: 1.5; }
+
+  .dots { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .dot-card { background: var(--black); border-radius: var(--r-card); padding: 48px; color: var(--white); display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+  .dot-row { display: inline-flex; align-items: center; gap: 10px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; color: var(--green); }
+  .dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: p 2s infinite; }
+  @keyframes p { 0%,100% { opacity:1; transform:scale(1) } 50% { opacity:.5; transform:scale(1.3) } }
+  .dot-card p { color: var(--on-dark-60); font-size: 14px; line-height: 1.7; }
+
+  .halo { background: var(--black); border-radius: var(--r-card); padding: 64px; text-align: center; color: var(--white); }
+  .halo-wrap { width: 320px; height: 320px; margin: 0 auto 28px; position: relative; display: flex; align-items: center; justify-content: center; }
+  .halo-wrap::before { content:''; position: absolute; inset:0; background: radial-gradient(circle, var(--green-glow) 0%, rgba(0,193,106,0.08) 40%, transparent 70%); border-radius: 50%; filter: blur(20px); animation: glow 4s ease-in-out infinite; }
+  @keyframes glow { 0%,100% { opacity:.8; transform: scale(1); } 50% { opacity:1; transform: scale(1.05); } }
+  .portrait { width: 200px; height: 200px; border-radius: 50%; background: linear-gradient(135deg,#1a1a1a,#333); border: 2px solid var(--on-dark-12); position: relative; z-index: 1; filter: drop-shadow(0 20px 40px rgba(0,0,0,.4)) drop-shadow(0 0 60px rgba(0,193,106,.15)); }
+  .halo .name { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--green); font-weight: 700; margin-bottom: 8px; }
+  .halo .desc { font-size: 14px; color: var(--on-dark-60); line-height: 1.7; max-width: 520px; margin: 0 auto; }
+
+  .lines { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+  .line-tile { background: var(--white); border: 1px solid var(--gray-200); border-radius: 14px; padding: 20px; text-align: center; }
+  .line-tile svg { display: block; margin: 0 auto 10px; color: var(--black); }
+  .line-tile .lab { font-size: 11px; color: var(--gray-600); font-weight: 600; }
+  .rule { border-left: 3px solid var(--green); padding: 14px 18px; background: var(--white); border-radius: 0 12px 12px 0; font-size: 13px; color: var(--gray-800); margin-top: 20px; line-height: 1.6; }
+</style></head>
+<body>
+  <header>
+    <span class="t-eyebrow">07 · Iconography</span>
+    <h1 class="t-display-2">No drawn icon set. Three <span class="t-accent">signals</span> instead.</h1>
+    <p>Carta Advisory doesn't ship an illustrated icon library. The brand speaks through three motifs: typographic glyphs welded to copy, the pulsing green dot, and the halo behind the anchor portrait.</p>
+  </header>
+
+  <section class="block">
+    <div class="block-title"><h2>Typographic glyphs</h2><p>Set in Manrope so they weld to adjacent text. Use in prose and CTAs.</p></div>
+    <div class="grid">
+      <div class="tile"><div class="gl">→</div><div class="name">Forward arrow</div><div class="use">After CTAs and links: "Read today's dispatch →"</div></div>
+      <div class="tile"><div class="gl green">✓</div><div class="name">Check</div><div class="use">Feature lists in subscribe cards. Always green, never black.</div></div>
+      <div class="tile"><div class="gl green">+</div><div class="name">Plus · delta up</div><div class="use">Positive delta: +2.14%, +12 bps. Green context only.</div></div>
+      <div class="tile"><div class="gl" style="color:#ff8a8a">−</div><div class="name">Minus · delta down</div><div class="use">Negative delta: −0.82%. True minus (U+2212), not hyphen.</div></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-title"><h2>The pulsing dot</h2><p>The system's only "live" signifier. Max once per viewport.</p></div>
+    <div class="dots">
+      <div class="dot-card">
+        <div class="dot-row"><span class="dot"></span>Today · Apr 20, 2026</div>
+        <p>Hero eyebrow — paired with the current date of the dispatch.</p>
+      </div>
+      <div class="dot-card">
+        <div class="dot-row"><span class="dot"></span>Live · Market open</div>
+        <p>Reader app status — shown when US equities are trading. Hides pre‑market and after close.</p>
+      </div>
+    </div>
+    <div class="rule"><strong>Rule.</strong> Never animate a second dot in the same viewport. If the page has a live‑alert pulse, the hero eyebrow drops the dot.</div>
+  </section>
+
+  <section class="block">
+    <div class="block-title"><h2>The halo</h2><p>The one visual flourish. Not decoration — the brand's anchor.</p></div>
+    <div class="halo">
+      <div class="halo-wrap"><div class="portrait"></div></div>
+      <div class="name">Brand halo</div>
+      <div class="desc">radial‑gradient(circle, rgba(0,193,106,.25) 0%, rgba(0,193,106,.08) 40%, transparent 70%) · 520px round · 20px blur · 4s breathe</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-title"><h2>Line icons (settings only)</h2><p>If a utility surface needs them: 1.5px stroke, 24px frame, currentColor, no fills.</p></div>
+    <div class="lines">
+      <div class="line-tile"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg><div class="lab">Menu</div></div>
+      <div class="line-tile"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><div class="lab">Search</div></div>
+      <div class="line-tile"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg><div class="lab">Grid</div></div>
+      <div class="line-tile"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"><path d="M4 19l6-6 4 4 6-8"/><path d="M14 9h6v6"/></svg><div class="lab">Chart</div></div>
+      <div class="line-tile"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"><path d="M12 3a4 4 0 0 1 4 4v3a6 6 0 0 0 2 4H6a6 6 0 0 0 2-4V7a4 4 0 0 1 4-4z"/><path d="M10 18a2 2 0 0 0 4 0"/></svg><div class="lab">Alert</div></div>
+      <div class="line-tile"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg><div class="lab">Settings</div></div>
+    </div>
+  </section>
+</body></html>

@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=1440">
+<title>Tyler Ontiveros — Independent Equity Advisor</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  body { background: var(--black); color: var(--on-dark-100); overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+
+  /* ─── Nav ─── */
+  .nav { position: sticky; top: 0; z-index: 50; height: var(--nav-h);
+    background: rgba(10,10,10,.96); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--on-dark-08);
+    display: flex; align-items: center; padding: 0 var(--page-pad); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: var(--page-max); margin: 0 auto; }
+  .wm { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 800; font-size: 18px; letter-spacing: -.01em; color: var(--white); }
+  .wm .dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+  .wm .thin { font-weight: 500; opacity: .55; }
+  @keyframes pulse { 0%,100% { opacity:1; transform:scale(1) } 50% { opacity:.55; transform:scale(1.3) } }
+  .nav-links { display: flex; gap: 36px; }
+  .nav-links a { color: var(--on-dark-50); font-size: var(--fs-meta); font-weight: 500; transition: color var(--dur-hover) var(--ease-out); }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta { display: flex; gap: 12px; align-items: center; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-family: var(--font-body); cursor: pointer; border: 0; transition: all var(--dur-hover) var(--ease-out); }
+  .btn-primary { background: var(--green); color: var(--black); padding: 10px 20px; border-radius: var(--r-pill); font-size: var(--fs-cta-sm); }
+  .btn-primary:hover { background: var(--green-hover); transform: translateY(-1px); }
+  .btn-ghost { color: var(--on-dark-85); font-size: var(--fs-cta-sm); }
+  .btn-ghost:hover { color: var(--white); }
+
+  /* ─── Hero ─── */
+  .hero { padding: 88px var(--page-pad) 120px; position: relative; }
+  .hero-inner { max-width: var(--page-max); margin: 0 auto; display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: center; }
+  .eyebrow-row { display: inline-flex; align-items: center; gap: 10px; font-size: var(--fs-micro); font-weight: 700; letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--green); margin-bottom: 28px; }
+  .eyebrow-row .pdot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+  .hero h1 { font-family: var(--font-display); font-weight: 800; font-size: var(--fs-display-1); line-height: var(--lh-display-tight); letter-spacing: var(--ls-display); color: var(--white); margin-bottom: 28px; max-width: 640px; }
+  .hero h1 .accent { color: var(--green); font-style: italic; }
+  .hero .lede { font-size: var(--fs-lede); line-height: var(--lh-body-open); color: var(--on-dark-60); max-width: 480px; margin-bottom: 36px; }
+  .hero-cta { display: flex; gap: 14px; align-items: center; margin-bottom: 40px; }
+  .btn-primary-lg { background: var(--green); color: var(--black); padding: 16px 28px; border-radius: var(--r-pill); font-size: var(--fs-cta); font-weight: 700; }
+  .btn-primary-lg:hover { background: var(--green-hover); transform: translateY(-2px); }
+  .btn-outline { border: 1px solid var(--on-dark-12); color: var(--white); padding: 15px 24px; border-radius: var(--r-pill); font-size: var(--fs-cta); background: transparent; }
+  .btn-outline:hover { border-color: var(--on-dark-30); }
+  .hero-fine { font-size: 12px; color: var(--on-dark-50); display: flex; gap: 18px; align-items: center; }
+  .hero-fine .sep { opacity: .4; }
+  .hero-fine .ckm { color: var(--green); font-weight: 700; }
+
+  /* Portrait */
+  .portrait-wrap { position: relative; display: flex; justify-content: center; align-items: center; min-height: 560px; }
+  .portrait-wrap::before { content: ''; position: absolute; width: 560px; height: 560px; background: radial-gradient(circle, rgba(0,193,106,.28) 0%, rgba(0,193,106,.08) 40%, transparent 70%); filter: blur(28px); animation: glow 4s ease-in-out infinite; }
+  @keyframes glow { 0%,100% { opacity:.85; transform: scale(1); } 50% { opacity:1; transform: scale(1.05); } }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  .portrait-img { position: relative; z-index: 1; width: 480px; height: auto; filter: drop-shadow(0 30px 60px rgba(0,0,0,.55)); animation: float 6s ease-in-out infinite; }
+  .credential { position: absolute; z-index: 2; background: var(--card-dark); border: 1px solid var(--on-dark-08); border-radius: 16px; padding: 14px 18px; font-size: 12px; backdrop-filter: blur(12px); }
+  .credential .num { font-family: var(--font-display); font-weight: 800; font-size: 22px; color: var(--white); letter-spacing: -.01em; display: block; line-height: 1; margin-bottom: 4px; }
+  .credential .lbl { color: var(--on-dark-60); font-weight: 500; font-size: 11px; }
+  .credential.a { top: 60px; left: 0; }
+  .credential.b { bottom: 90px; right: 10px; }
+  .credential.c { top: 220px; right: -20px; }
+
+  /* ─── Trust strip ─── */
+  .trust { background: var(--gray-50); color: var(--black); padding: 32px var(--page-pad); }
+  .trust-inner { max-width: var(--page-max); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+  .trust-label { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; color: var(--gray-400); }
+  .trust-pills { display: flex; gap: 10px; flex-wrap: wrap; }
+  .pill { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--r-pill); padding: 8px 16px; font-size: 12px; font-weight: 600; color: var(--gray-800); }
+
+  /* ─── Sections ─── */
+  .section { padding: 120px var(--page-pad); }
+  .section.light { background: var(--white); color: var(--black); }
+  .section-inner { max-width: var(--page-max); margin: 0 auto; }
+  .section-head { margin-bottom: 64px; max-width: 720px; }
+  .section-head .eb { font-size: var(--fs-micro); font-weight: 700; letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--green); display: block; margin-bottom: 18px; }
+  .section-head h2 { font-family: var(--font-display); font-weight: 800; font-size: var(--fs-display-2); line-height: var(--lh-display); letter-spacing: var(--ls-display); margin-bottom: 20px; }
+  .section-head p { font-size: 17px; line-height: 1.65; color: var(--gray-600); max-width: 560px; }
+  .section.dark .section-head p { color: var(--on-dark-60); }
+
+  /* ─── About ─── */
+  .about-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .about-copy h2 { font-family: var(--font-display); font-weight: 800; font-size: var(--fs-display-2); line-height: var(--lh-display); letter-spacing: var(--ls-display); color: var(--black); margin-bottom: 28px; }
+  .about-copy p { font-size: 17px; line-height: 1.85; color: var(--black); font-weight: 500; margin-bottom: 18px; }
+  .about-cards { display: flex; flex-direction: column; gap: 16px; }
+  .about-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 20px; padding: 28px 32px; display: flex; gap: 24px; align-items: center; transition: all .2s var(--ease-out); }
+  .about-card:hover { border-color: var(--green); transform: translateX(4px); }
+  .about-card-num { font-family: var(--font-display); font-weight: 800; font-size: 56px; line-height: 1; color: var(--green); letter-spacing: -.03em; min-width: 64px; }
+  .about-card strong { display: block; font-size: 16px; font-weight: 700; color: var(--black); margin-bottom: 6px; }
+  .about-card span.sub { font-size: 14px; color: var(--gray-600); font-weight: 400; line-height: 1.5; }
+
+  /* ─── Services ─── */
+  .svc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .svc-card { background: var(--card-dark); border: 1px solid var(--on-dark-08); border-radius: var(--r-card); padding: 36px; transition: all .2s var(--ease-out); }
+  .svc-card:hover { border-color: var(--green); transform: translateY(-4px); }
+  .svc-card--ai { grid-column: span 2; background: linear-gradient(135deg, rgba(0,193,106,0.06) 0%, rgba(0,193,106,0.02) 100%); border-color: rgba(0,193,106,.25); padding: 40px; }
+  .svc-card--ai:hover { border-color: var(--green); }
+  .svc-ai-head { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+  .svc-ai-badge { font-family: var(--font-body); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--black); background: var(--green); padding: 4px 10px; border-radius: 20px; }
+  .svc-ai-lede { font-size: 15px; line-height: 1.7; color: var(--on-dark-85); margin-bottom: 24px; max-width: 720px; }
+  .svc-ai-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; }
+  .svc-card-head { font-family: var(--font-display); font-weight: 800; font-size: 22px; color: var(--white); letter-spacing: -.01em; display: block; margin-bottom: 24px; }
+  .svc-items { list-style: none; }
+  .svc-items li { padding: 10px 0; font-size: 15px; color: var(--on-dark-85); border-bottom: 1px solid var(--on-dark-08); display: flex; align-items: center; gap: 12px; }
+  .svc-items li:last-child { border-bottom: 0; }
+  .svc-items li::before { content: ''; width: 6px; height: 6px; background: var(--green); border-radius: 50%; flex-shrink: 0; }
+
+  /* ─── How it works ─── */
+  .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .how-card { padding: 40px 32px; border: 1px solid var(--gray-200); border-radius: 20px; background: var(--white); transition: all .2s var(--ease-out); position: relative; }
+  .how-card:hover { border-color: var(--green); }
+  .how-num { font-family: var(--font-display); font-weight: 800; font-size: 48px; line-height: 1; color: var(--green); letter-spacing: -.03em; margin-bottom: 20px; }
+  .how-title { font-family: var(--font-display); font-weight: 800; font-size: 22px; color: var(--black); letter-spacing: -.01em; margin-bottom: 14px; line-height: 1.2; }
+  .how-body { font-size: 15px; color: var(--gray-600); line-height: 1.65; }
+
+  /* ─── Pricing ─── */
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .plan { background: var(--card-dark); border: 1px solid var(--on-dark-08); border-radius: var(--r-card); padding: 40px 36px; position: relative; }
+  .plan.featured { border-color: var(--green); background: linear-gradient(180deg, rgba(0,193,106,.04), transparent 40%), var(--card-dark); }
+  .plan-badge { position: absolute; top: -13px; left: 36px; background: var(--green); color: var(--black); padding: 5px 14px; border-radius: var(--r-pill); font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+  .plan-name { font-family: var(--font-display); font-weight: 800; font-size: 22px; color: var(--white); letter-spacing: -.01em; margin-bottom: 12px; }
+  .plan-price { font-family: var(--font-display); font-weight: 800; font-size: var(--fs-price); line-height: 1; color: var(--white); letter-spacing: -.03em; margin-bottom: 16px; display: flex; align-items: baseline; gap: 4px; }
+  .plan-price sub { font-family: var(--font-body); font-size: 15px; font-weight: 500; color: var(--on-dark-50); }
+  .plan-desc { font-size: 14px; color: var(--on-dark-60); line-height: 1.6; margin-bottom: 20px; min-height: 66px; }
+  .plan-retainer { font-size: 12px; color: var(--on-dark-50); margin-bottom: 20px; padding: 10px 14px; background: var(--on-dark-05); border-radius: 10px; border-left: 2px solid var(--green); }
+  .plan-retainer b { color: var(--white); font-weight: 700; }
+  .plan-features { list-style: none; margin-bottom: 28px; }
+  .plan-features li { padding: 10px 0; font-size: 14px; color: var(--on-dark-85); border-bottom: 1px solid var(--on-dark-08); display: flex; gap: 10px; align-items: center; }
+  .plan-features li:last-child { border-bottom: 0; }
+  .plan-features li::before { content: '✓'; color: var(--green); font-weight: 700; }
+  .plan-btn { display: block; text-align: center; padding: 14px; border-radius: var(--r-pill); background: var(--on-dark-05); border: 1px solid var(--on-dark-12); color: var(--white); font-size: 14px; font-weight: 600; transition: all .2s var(--ease-out); }
+  .plan-btn:hover { background: var(--on-dark-08); border-color: var(--on-dark-30); }
+  .plan.featured .plan-btn { background: var(--green); color: var(--black); border: 0; }
+  .plan.featured .plan-btn:hover { background: var(--green-hover); }
+  .price-note { text-align: center; margin-top: 36px; font-size: 14px; color: var(--on-dark-60); }
+  .price-note a { color: var(--green); font-weight: 600; }
+
+  /* ─── FAQ ─── */
+  .faq-wrap { display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px; align-items: start; }
+  .faq-item { border-bottom: 1px solid var(--gray-200); padding: 24px 0; }
+  .faq-item:first-child { padding-top: 0; }
+  .faq-item summary { font-family: var(--font-display); font-weight: 700; font-size: 19px; color: var(--black); letter-spacing: -.01em; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after { content: '+'; color: var(--green); font-size: 22px; font-weight: 300; transition: transform .2s; }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-body { padding-top: 16px; font-size: 15px; color: var(--gray-600); line-height: 1.75; }
+
+  /* ─── CTA ─── */
+  .cta-wrap { background: var(--black); padding: 120px var(--page-pad); text-align: center; position: relative; overflow: hidden; }
+  .cta-wrap::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(0,193,106,.08) 0%, transparent 60%); }
+  .cta-inner { max-width: 720px; margin: 0 auto; position: relative; z-index: 1; }
+  .cta-inner h2 { font-family: var(--font-display); font-weight: 800; font-size: var(--fs-display-2); line-height: var(--lh-display); letter-spacing: var(--ls-display); color: var(--white); margin-bottom: 20px; }
+  .cta-inner p { font-size: 17px; color: var(--on-dark-60); line-height: 1.65; margin-bottom: 32px; max-width: 520px; margin-left: auto; margin-right: auto; }
+  .cta-btns { display: flex; gap: 14px; justify-content: center; margin-bottom: 20px; }
+  .cta-email { font-size: 13px; color: var(--on-dark-50); }
+  .cta-email a { color: var(--green); font-weight: 600; }
+
+  /* ─── Footer ─── */
+  footer { background: var(--black); border-top: 1px solid var(--on-dark-08); padding: 40px var(--page-pad); }
+  footer strong { font-family: var(--font-display); font-weight: 800; color: var(--white); font-size: 15px; }
+  footer span { font-size: 12px; color: var(--on-dark-50); }
+
+  /* Section dividers */
+  .sep { border: 0; border-top: 1px solid var(--gray-100); margin: 0 var(--page-pad); }
+
+  /* Floating index return */
+  .idx-back { position: fixed; bottom: 20px; right: 20px; z-index: 100;
+    background: var(--card-dark); border: 1px solid var(--on-dark-12);
+    color: var(--on-dark-85); padding: 8px 14px; border-radius: var(--r-pill);
+    font-size: 11px; font-weight: 600; letter-spacing: .04em;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    transition: all .2s var(--ease-out); }
+  .idx-back:hover { border-color: var(--green); color: var(--white); }
+  .idx-back .pdot { width: 5px; height: 5px; background: var(--green); border-radius: 50%; }
+</style></head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="wm" href="design/"><span class="dot"></span>Tyler <span class="thin">Ontiveros</span> <span style="font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--green); border: 1px solid var(--green); padding: 2px 8px; border-radius: 20px; margin-left: 8px;">Independent</span></a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#firms">For firms</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="#pricing">Plans</a>
+      <a class="btn btn-primary" href="https://checkout.stripe.com/" target="_blank" rel="noopener">Get started →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="eyebrow-row"><span class="pdot"></span>Independent · Expert Carta Consulting</div>
+      <h1>Your dedicated<br><span class="accent">Carta expert.</span><br>On speed dial.</h1>
+      <p class="lede">A specialist who lives inside Carta every day — from Health Check fixes and data warnings to cap-table cleanup and AI-assisted workflows. One expert. One number. No tickets.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary-lg" href="#pricing">Choose a plan →</a>
+        <a class="btn btn-outline" href="mailto:tyler@yourdomain.com">Email Tyler</a>
+      </div>
+      <div class="hero-fine">
+        <span class="ckm">✓ Direct line after signup</span>
+        <span class="sep">·</span>
+        <span>Month-to-month</span>
+        <span class="sep">·</span>
+        <span>Cancel anytime</span>
+      </div>
+    </div>
+    <div class="portrait-wrap">
+      <img class="portrait-img" src="assets/tyler.png" alt="Tyler Ontiveros, Carta Advisor"/>
+      <div class="credential a"><span class="num">5+</span><span class="lbl">Years on Carta</span></div>
+      <div class="credential b"><span class="num">Same day</span><span class="lbl">Response time</span></div>
+      <div class="credential c"><span class="num">1:1</span><span class="lbl">Personal rep</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<div class="trust">
+  <div class="trust-inner">
+    <span class="trust-label">Trusted by founders and CFOs across</span>
+    <div class="trust-pills">
+      <span class="pill">Pre-seed</span>
+      <span class="pill">Seed</span>
+      <span class="pill">Series A</span>
+      <span class="pill">Series B</span>
+      <span class="pill">Post-pivot</span>
+      <span class="pill">Pre-audit</span>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section light">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="eb">About Tyler</span>
+    </div>
+    <div class="about-wrap">
+      <div class="about-copy">
+        <h2>One person.<br>Who actually<br>picks up.</h2>
+        <p style="margin-top: 24px;">I've spent 5+ years inside the Carta ecosystem — working with founders, CFOs, and ops leads on everything from first-time grants to complex equity events and audit-ready cleanups.</p>
+        <p>What I kept seeing: companies buy Carta and quietly wonder who's supposed to run it. Support is slow, the docs sprawl, and most questions aren't that hard — they just need someone who's done it a hundred times.</p>
+        <p>Work with me and you have that person on call. Text, email, or phone — I'm the one who answers, and I stay with you through whatever you're dealing with.</p>
+      </div>
+      <div class="about-cards">
+        <div class="about-card">
+          <div class="about-card-num">5+</div>
+          <div>
+            <strong>Years in the Carta ecosystem</strong>
+            <span class="sub">Hands-on experience across startups at every stage</span>
+          </div>
+        </div>
+        <div class="about-card">
+          <div class="about-card-num">1</div>
+          <div>
+            <strong>Person, every single time</strong>
+            <span class="sub">No juniors, no handoffs, no agency overhead</span>
+          </div>
+        </div>
+        <div class="about-card">
+          <div class="about-card-num">∞</div>
+          <div>
+            <strong>Questions you can ask</strong>
+            <span class="sub">Your time is better spent building — mine is spent on Carta</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section dark" id="services">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="eb">What I handle</span>
+      <h2 style="color: var(--white);">Expert Carta consulting,<br>end to end.</h2>
+      <p>A dedicated Carta expert for everything inside the platform — from a stakeholder issue to fixing every Health Check on your account.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card">
+        <span class="svc-card-head">Stakeholder Support</span>
+        <ul class="svc-items">
+          <li>Password resets &amp; account access</li>
+          <li>2FA resets</li>
+          <li>Portfolio onboarding</li>
+          <li>Accepting securities &amp; invitations</li>
+          <li>Payment &amp; bank info updates</li>
+          <li>Cap table access config</li>
+          <li>Share transfers</li>
+        </ul>
+      </div>
+      <div class="svc-card">
+        <span class="svc-card-head">Cap Table Management</span>
+        <ul class="svc-items">
+          <li>Issuing &amp; drafting equity awards</li>
+          <li>Modifying certificates &amp; grants</li>
+          <li>Editing vesting schedules</li>
+          <li>Option, RSA &amp; RSU issuance</li>
+          <li>SAFE &amp; convertible note setup</li>
+          <li>New round configuration</li>
+          <li>Reports &amp; exports</li>
+        </ul>
+      </div>
+      <div class="svc-card">
+        <span class="svc-card-head">Equity Events</span>
+        <ul class="svc-items">
+          <li>Option exercise assistance</li>
+          <li>Repricing</li>
+          <li>Stock splits</li>
+          <li>Board approvals &amp; consents</li>
+          <li>409A coordination</li>
+          <li>SAFE &amp; note conversion</li>
+          <li>Dilution modeling</li>
+        </ul>
+      </div>
+      <div class="svc-card">
+        <span class="svc-card-head">Cleanup &amp; Audit Prep</span>
+        <ul class="svc-items">
+          <li>Fix Health Checks</li>
+          <li>Resolve Data Warnings</li>
+          <li>Duplicate stakeholder merges</li>
+          <li>Defective securities remediation</li>
+          <li>Disorganized data restructuring</li>
+          <li>Historical data corrections</li>
+          <li>Pre-fundraise cleanup</li>
+          <li>Stakeholder reconciliation</li>
+          <li>Missing document tracking</li>
+          <li>Standard reporting &amp; exports</li>
+        </ul>
+      </div>
+      <div class="svc-card svc-card--ai">
+        <div class="svc-ai-head">
+          <span class="svc-card-head" style="margin-bottom: 0;">AI &amp; Workflow Automation</span>
+          <span class="svc-ai-badge">New</span>
+        </div>
+        <p class="svc-ai-lede">As Carta rolls out AI features and the broader equity stack adds agents, automation, and integrations — you get an expert who's already using them. The platform keeps getting more powerful. I make sure yours actually benefits.</p>
+        <div class="svc-ai-cols">
+          <ul class="svc-items">
+            <li>Carta AI feature setup &amp; configuration</li>
+            <li>Bulk operations &amp; data imports</li>
+            <li>Templates for grants, consents &amp; events</li>
+          </ul>
+          <ul class="svc-items">
+            <li>Reporting automation &amp; saved views</li>
+            <li>Integration with your stack (HRIS, payroll)</li>
+            <li>AI-assisted equity issuance workflows</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section light" id="how">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="eb">How it works</span>
+      <h2>Three steps.<br>That's it.</h2>
+      <p>No portals. No onboarding calls. No scheduling. Pick a plan, get my number, use it.</p>
+    </div>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-num">01</div>
+        <div class="how-title">Choose a plan</div>
+        <div class="how-body">Subscribe in about 30 seconds through Stripe. Month-to-month, cancel whenever — no contracts or commitments.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">02</div>
+        <div class="how-title">Get my direct line</div>
+        <div class="how-body">The moment payment clears, you'll have my personal phone and email. Text, call, or send a doc — whatever's easiest.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">03</div>
+        <div class="how-title">Handled, same day</div>
+        <div class="how-body">Most things are sorted within hours. Complex events I'll run start-to-finish and keep you posted without the noise.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section dark" id="pricing">
+  <div class="section-inner">
+    <div class="section-head" style="text-align: center; margin-left: auto; margin-right: auto;">
+      <span class="eb">Pricing</span>
+      <h2 style="color: var(--white);">Simple, flat-rate plans.</h2>
+      <p style="margin-left: auto; margin-right: auto;">Pick a plan, get my direct line, ask me anything. No surprises.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="plan">
+        <div class="plan-name">Personal</div>
+        <div class="plan-price">$400<sub>/mo</sub></div>
+        <div class="plan-desc">For founders with occasional Carta needs who want a real person on call instead of a ticket queue.</div>
+        <ul class="plan-features">
+          <li>Direct text, call &amp; email access</li>
+          <li>Same-day responses, weekdays</li>
+          <li>Stakeholder &amp; access support</li>
+          <li>Cap-table questions &amp; walkthroughs</li>
+          <li>Month-to-month</li>
+        </ul>
+        <a class="plan-btn" href="https://buy.stripe.com/REPLACE_PERSONAL" target="_blank" rel="noopener">Subscribe — $400/mo</a>
+      </div>
+      <div class="plan featured">
+        <div class="plan-badge">Most Popular</div>
+        <div class="plan-name">Priority</div>
+        <div class="plan-price">$900<sub>/mo</sub></div>
+        <div class="plan-desc">For companies actively managing their cap table — issuing grants, running a round, or simply done with Carta tickets.</div>
+        <div class="plan-retainer"><b>+ $500 one-time onboarding</b> — covers cap-table review &amp; access setup. Refundable in first 14 days.</div>
+        <ul class="plan-features">
+          <li>Everything in Personal</li>
+          <li>Priority response, incl. evenings</li>
+          <li>Monthly 60-min working session</li>
+          <li>Equity issuance &amp; modifications</li>
+          <li>Vesting edits &amp; event support</li>
+          <li>Cap-table reporting &amp; exports</li>
+        </ul>
+        <a class="plan-btn" href="https://buy.stripe.com/REPLACE_PRIORITY" target="_blank" rel="noopener">Subscribe — $900/mo</a>
+      </div>
+      <div class="plan">
+        <div class="plan-name">Dedicated</div>
+        <div class="plan-price">$2,200<sub>/mo</sub></div>
+        <div class="plan-desc">For companies who want a dedicated Carta expert on retainer — cleanups, Health Check fixes, audit prep, and platform optimization handled continuously.</div>
+        <div class="plan-retainer"><b>+ $1,500 one-time onboarding</b> — full Carta audit, cleanup &amp; documentation review. Refundable in first 14 days.</div>
+        <ul class="plan-features">
+          <li>Everything in Priority</li>
+          <li>Weekly working session</li>
+          <li>Ongoing Health Check &amp; warning resolution</li>
+          <li>Defective security remediation</li>
+          <li>Cap-table cleanup &amp; reconciliation</li>
+          <li>Audit &amp; fundraise prep</li>
+          <li>AI-assisted equity workflows</li>
+        </ul>
+        <a class="plan-btn" href="https://buy.stripe.com/REPLACE_DEDICATED" target="_blank" rel="noopener">Subscribe — $2,200/mo</a>
+      </div>
+    </div>
+    <p class="price-note">Not sure which fits? Email <a href="mailto:tyler@yourdomain.com">tyler@yourdomain.com</a> — I'll help you pick. Custom scope (migrations, multi-entity cleanups) quoted separately. <span style="opacity: .55;">Not ready for a subscription, or need something outside scope? <b style="color: var(--white); opacity: .85; font-weight: 600;">$275/hr</b>, 1-hour minimum.</span></p>
+  </div>
+</section>
+
+<!-- FOR FIRMS -->
+<section class="section light" id="firms" style="padding-top: 100px; padding-bottom: 100px;">
+  <div class="section-inner">
+    <div class="firms-wrap">
+      <div class="firms-left">
+        <span class="eb">For firms &amp; partners</span>
+        <h2 class="firms-h2">Already run an equity<br>admin practice?<br><span style="color: var(--green); font-style: italic;">Let's work together.</span></h2>
+        <p class="firms-lede">If you're at a cap-table firm, fractional CFO practice, law firm, or accounting shop — I'm happy to partner. You keep the client relationship; I handle overflow, after-hours, or Carta-specific depth when you need it.</p>
+        <a class="btn btn-primary-lg" href="mailto:tyler@yourdomain.com?subject=Partnership%20inquiry" style="margin-top: 8px;">Email about partnerships →</a>
+      </div>
+      <div class="firms-right">
+        <div class="firms-card">
+          <div class="firms-card-icon">↳</div>
+          <strong>White-label overflow</strong>
+          <p>Send me the ticket, I deliver through your brand. Your client never sees me. Flat per-engagement or hourly.</p>
+        </div>
+        <div class="firms-card">
+          <div class="firms-card-icon">⇌</div>
+          <strong>Referral partnership</strong>
+          <p>Clients too small for your model? Send them my way. I'll send back anything needing a full-service firm — public-company accounting, ASC 718, complex M&amp;A.</p>
+        </div>
+        <div class="firms-card">
+          <div class="firms-card-icon">◷</div>
+          <strong>On-call Carta specialist</strong>
+          <p>Your team knows equity. I know Carta. Retain me as a back-channel expert for platform-specific questions — no client exposure required.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .firms-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .firms-h2 { font-family: var(--font-display); font-weight: 800; font-size: var(--fs-display-2); line-height: var(--lh-display); letter-spacing: var(--ls-display); color: var(--black); margin: 20px 0 24px; }
+  .firms-lede { font-size: 17px; line-height: 1.75; color: var(--gray-600); margin-bottom: 28px; max-width: 480px; }
+  .firms-right { display: flex; flex-direction: column; gap: 14px; }
+  .firms-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 20px; padding: 26px 30px; transition: all .2s var(--ease-out); }
+  .firms-card:hover { border-color: var(--green); transform: translateX(4px); }
+  .firms-card-icon { font-family: var(--font-display); font-weight: 800; font-size: 28px; color: var(--green); line-height: 1; margin-bottom: 10px; }
+  .firms-card strong { display: block; font-family: var(--font-display); font-weight: 700; font-size: 18px; color: var(--black); margin-bottom: 8px; letter-spacing: -.01em; }
+  .firms-card p { font-size: 14px; line-height: 1.6; color: var(--gray-600); }
+</style>
+
+<!-- FAQ -->
+<section class="section light" id="faq">
+  <div class="section-inner">
+    <div class="faq-wrap">
+      <div>
+        <span class="eb" style="display: block; margin-bottom: 18px;">FAQ</span>
+        <h2 style="font-family: var(--font-display); font-weight: 800; font-size: var(--fs-display-2); line-height: var(--lh-display); letter-spacing: var(--ls-display); color: var(--black);">Common<br>questions.</h2>
+      </div>
+      <div>
+        <details class="faq-item" open>
+          <summary>How do I actually reach you?</summary>
+          <div class="faq-body">As soon as your subscription is active through Stripe, you'll land on a confirmation page with my direct phone and email. From then on you text me, call me, or email — whichever is easiest. No portals, no ticket system.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Do you need access to our Carta account?</summary>
+          <div class="faq-body">For most things, yes — it's the fastest way to get you unstuck. I'll be added as a user with the right access level and treat every account with the discretion you'd expect. If you'd rather keep me out and just have me walk you through things over screen share, that works too.</div>
+        </details>
+        <details class="faq-item">
+          <summary>What kind of companies do you typically work with?</summary>
+          <div class="faq-body">Mostly early-stage through Series B startups on Carta — anywhere from pre-seed founders issuing their first options to companies mid-fundraise or prepping for audit. If you're on Carta, I can almost certainly help.</div>
+        </details>
+        <details class="faq-item">
+          <summary>How fast do you actually respond?</summary>
+          <div class="faq-body">Same day, almost always. Most messages get a reply within a couple hours during working hours. Anything that lands overnight or on a weekend, I'll get to first thing.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Is this legal advice?</summary>
+          <div class="faq-body">No — I'm not a lawyer and I don't give legal advice. I handle the Carta platform and the operational side of equity administration. For legal questions you should still work with your attorney.</div>
+        </details>
+        <details class="faq-item">
+          <summary>What counts as a "complex project"?</summary>
+          <div class="faq-body">Things like full cap-table cleanups, platform migrations, setting up a new financing round, or major audit prep. On the Dedicated plan these are included; on Personal or Priority I'll scope them separately. Day-to-day admin work is always covered.</div>
+        </details>
+        <details class="faq-item">
+          <summary>What if I just have one question or one project?</summary>
+          <div class="faq-body">If a subscription doesn't make sense, I work hourly at $275/hr (1-hour minimum). Good for one-off cleanups, a single grant issuance, or a quick second opinion. Email me with what you're dealing with and I'll give you a realistic estimate.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Can I cancel anytime?</summary>
+          <div class="faq-body">Yes. Month-to-month through Stripe, cancel whenever — no contracts, no commitments, no awkward conversations.</div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-wrap" id="contact">
+  <div class="cta-inner">
+    <h2>Ready for a<br>Carta rep of your own?</h2>
+    <p>Pick a plan, check out through Stripe, and you'll have my direct phone and email on the next screen. That's the whole onboarding.</p>
+    <div class="cta-btns">
+      <a class="btn btn-primary-lg" href="#pricing">See plans →</a>
+      <a class="btn btn-outline" href="mailto:tyler@yourdomain.com">Email first</a>
+    </div>
+    <p class="cta-email">Questions before you subscribe? <a href="mailto:tyler@yourdomain.com">tyler@yourdomain.com</a></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div style="max-width: var(--page-max); margin: 0 auto; width: 100%;">
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; margin-bottom: 20px;">
+      <strong>Tyler Ontiveros — Independent Equity Advisor</strong>
+      <span>tyler@yourdomain.com · (801) 821-7445</span>
+    </div>
+    <div style="padding-top: 20px; border-top: 1px solid var(--on-dark-08); font-size: 11px; color: var(--on-dark-50); line-height: 1.6;">
+      <strong style="display: block; font-family: var(--font-body); font-size: 11px; color: var(--on-dark-60); margin-bottom: 6px; letter-spacing: .04em; text-transform: uppercase;">Disclosure</strong>
+      Independent advisor. Not an employee, agent, or partner of Carta, Inc. Not affiliated with, endorsed by, or sponsored by Carta. “Carta” is a trademark of its respective owner and is referenced here only to describe the platform this service supports. Services provided do not constitute legal, tax, accounting, or investment advice. For legal or securities questions, consult a licensed attorney.
+    </div>
+  </div>
+</footer>
+
+<a class="idx-back" href="design/"><span class="pdot"></span>Design system index</a>
+
+</body></html>

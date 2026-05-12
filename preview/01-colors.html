@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=1200">
+<title>Colors — Carta Advisory</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 64px 80px; background: var(--gray-50); }
+  header { margin-bottom: 56px; max-width: 720px; }
+  header .eyebrow { margin-bottom: 18px; }
+  header h1 { margin-bottom: 16px; }
+  header p { color: var(--gray-600); font-size: 17px; line-height: 1.6; }
+  .block { margin-bottom: 72px; }
+  .block-title { display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px; border-bottom: 1px solid var(--gray-200); padding-bottom: 14px; }
+  .block-title h2 { font-family: var(--font-display); font-weight: 800; font-size: 28px; letter-spacing: -.02em; }
+  .block-title p  { color: var(--gray-600); font-size: 14px; }
+  .grid { display: grid; gap: 16px; }
+  .cores { grid-template-columns: repeat(3, 1fr); }
+  .grays { grid-template-columns: repeat(6, 1fr); }
+  .alphas { grid-template-columns: repeat(4, 1fr); }
+  .swatch { border-radius: 18px; overflow: hidden; border: 1px solid var(--gray-200); background: var(--white); }
+  .chip { height: 160px; display: flex; align-items: flex-end; padding: 16px; }
+  .chip.lg { height: 220px; }
+  .meta { padding: 16px 18px 18px; }
+  .meta .name { font-weight: 700; font-size: 14px; margin-bottom: 2px; }
+  .meta .hex  { font-size: 12px; color: var(--gray-600); font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+  .meta .use  { font-size: 12px; color: var(--gray-400); margin-top: 8px; line-height: 1.5; }
+  /* checkerboard for alpha chips */
+  .chk { background-image:
+    linear-gradient(45deg,#ddd 25%,transparent 25%),
+    linear-gradient(-45deg,#ddd 25%,transparent 25%),
+    linear-gradient(45deg,transparent 75%,#ddd 75%),
+    linear-gradient(-45deg,transparent 75%,#ddd 75%);
+    background-size: 16px 16px;
+    background-position: 0 0,0 8px,8px -8px,-8px 0;
+  }
+  /* pairings */
+  .pairs { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .pair { border-radius: var(--r-card); padding: 40px; position: relative; overflow: hidden; min-height: 220px; }
+  .pair.dark { background: var(--black); color: var(--white); }
+  .pair.light { background: var(--white); border: 1px solid var(--gray-200); }
+  .pair h3 { font-family: var(--font-display); font-weight: 800; font-size: 28px; letter-spacing: -.02em; line-height: 1.05; margin-bottom: 12px; }
+  .pair.dark h3 .t-accent { color: var(--green); }
+  .pair .body { font-size: 14px; line-height: 1.7; max-width: 320px; }
+  .pair.dark .body { color: var(--on-dark-60); }
+  .pair.light .body { color: var(--gray-600); }
+  .pair .tag { position: absolute; top: 20px; right: 24px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; }
+  .pair.dark .tag { color: var(--green); }
+  .pair.light .tag { color: var(--gray-400); }
+  .rule { border-left: 3px solid var(--green); padding: 14px 18px; background: var(--white); border-radius: 0 12px 12px 0; font-size: 13px; color: var(--gray-800); margin-top: 16px; }
+</style></head>
+<body>
+  <header>
+    <span class="t-eyebrow">01 · Colors</span>
+    <h1 class="t-display-2">Black, white, one&nbsp;<span class="t-accent">green</span>.</h1>
+    <p>The whole brand resolves to three colors plus a warm six‑step gray scale. If a design needs a second hue, it needs a second consideration instead. On dark surfaces, text layers are rgba white — never a second color.</p>
+  </header>
+
+  <section class="block">
+    <div class="block-title"><h2>Core</h2><p>The only three swatches that carry brand meaning.</p></div>
+    <div class="grid cores">
+      <div class="swatch"><div class="chip lg" style="background:var(--black)"><span class="t-label-caps" style="color:var(--on-dark-50)">Ink</span></div>
+        <div class="meta"><div class="name">Black</div><div class="hex">#0A0A0A · var(--black)</div>
+          <div class="use">Primary brand surface. Nav, hero, dark sections, email dispatch. Warm, not pure #000.</div></div></div>
+      <div class="swatch"><div class="chip lg" style="background:var(--white);border-bottom:1px solid var(--gray-200)"><span class="t-label-caps">Surface</span></div>
+        <div class="meta"><div class="name">White</div><div class="hex">#FFFFFF · var(--white)</div>
+          <div class="use">Light canvas for mid‑page zoom‑out sections, card text on dark.</div></div></div>
+      <div class="swatch"><div class="chip lg" style="background:var(--green)"><span style="color:var(--black);font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase">Accent</span></div>
+        <div class="meta"><div class="name">Green</div><div class="hex">#00C16A · var(--green)</div>
+          <div class="use">CTAs, eyebrow dot, one accent word per hero, check marks, hero halo. Never behind body copy.</div></div></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-title"><h2>Grays</h2><p>Warm, narrow. Six steps — resist adding intermediates.</p></div>
+    <div class="grid grays">
+      <div class="swatch"><div class="chip" style="background:var(--gray-50)"></div>
+        <div class="meta"><div class="name">Gray 50</div><div class="hex">#F9F9F9</div><div class="use">Trust bar, alt page bg</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--gray-100)"></div>
+        <div class="meta"><div class="name">Gray 100</div><div class="hex">#F0F0F0</div><div class="use">Subtle dividers</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--gray-200)"></div>
+        <div class="meta"><div class="name">Gray 200</div><div class="hex">#E2E2E2</div><div class="use">Input + pill borders</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--gray-400)"></div>
+        <div class="meta"><div class="name">Gray 400</div><div class="hex">#999999</div><div class="use">Caps labels on light</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--gray-600)"></div>
+        <div class="meta"><div class="name">Gray 600</div><div class="hex">#555555</div><div class="use">Muted body copy</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--gray-800)"></div>
+        <div class="meta"><div class="name">Gray 800</div><div class="hex">#222222</div><div class="use">Near‑ink text, trust pills</div></div></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-title"><h2>On‑dark alpha</h2><p>Text &amp; dividers on <code style="background:var(--black);color:var(--white);padding:2px 8px;border-radius:6px;font-size:12px">#0A0A0A</code> are rgba white, not gray.</p></div>
+    <div class="grid alphas">
+      <div class="swatch"><div class="chip chk" style="background:var(--on-dark-100)"></div>
+        <div class="meta"><div class="name">on‑dark / 92</div><div class="hex">rgba(255,255,255,.92)</div><div class="use">Primary text on black</div></div></div>
+      <div class="swatch"><div class="chip chk" style="background:var(--on-dark-60)"></div>
+        <div class="meta"><div class="name">on‑dark / 60</div><div class="hex">rgba(255,255,255,.60)</div><div class="use">Hero lede, secondary</div></div></div>
+      <div class="swatch"><div class="chip chk" style="background:var(--on-dark-50)"></div>
+        <div class="meta"><div class="name">on‑dark / 50</div><div class="hex">rgba(255,255,255,.50)</div><div class="use">Nav links, muted meta</div></div></div>
+      <div class="swatch"><div class="chip chk" style="background:var(--on-dark-08)"></div>
+        <div class="meta"><div class="name">on‑dark / 08</div><div class="hex">rgba(255,255,255,.08)</div><div class="use">Card borders, dividers</div></div></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-title"><h2>Pairings</h2><p>The only two surface contexts: dark‑dominant and light‑dominant.</p></div>
+    <div class="pairs">
+      <div class="pair dark">
+        <span class="tag">Dark surface</span>
+        <h3>We watch the 10‑year, not the&nbsp;<span class="t-accent">10‑second.</span></h3>
+        <p class="body">Manrope 14/1.7 at 60% white sits confidently on ink. Headlines use Syne with a single green accent word — never more than one.</p>
+      </div>
+      <div class="pair light">
+        <span class="tag">Light surface</span>
+        <h3>A sober read on a loud market.</h3>
+        <p class="body">On white, body copy is Gray 600. Headlines are pure #0A0A0A. Green is reserved for the eyebrow, one CTA, and the check glyph — nothing else.</p>
+      </div>
+    </div>
+    <div class="rule"><strong>Rule.</strong> Use green <em>once</em> per hero unit. A second green element steals authority from the first.</div>
+  </section>
+</body></html>
