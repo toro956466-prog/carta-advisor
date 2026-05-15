@@ -159,22 +159,13 @@
   /* Section dividers */
   .sep { border: 0; border-top: 1px solid var(--gray-100); margin: 0 var(--page-pad); }
 
-  /* Floating index return */
-  .idx-back { position: fixed; bottom: 20px; right: 20px; z-index: 100;
-    background: var(--card-dark); border: 1px solid var(--on-dark-12);
-    color: var(--on-dark-85); padding: 8px 14px; border-radius: var(--r-pill);
-    font-size: 11px; font-weight: 600; letter-spacing: .04em;
-    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
-    transition: all .2s var(--ease-out); }
-  .idx-back:hover { border-color: var(--green); color: var(--white); }
-  .idx-back .pdot { width: 5px; height: 5px; background: var(--green); border-radius: 50%; }
 </style></head>
-<body>
+<body id="top">
 
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
-    <a class="wm" href="design/"><span class="dot"></span>Tyler <span class="thin">Ontiveros</span> <span style="font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--green); border: 1px solid var(--green); padding: 2px 8px; border-radius: 20px; margin-left: 8px;">Independent</span></a>
+    <a class="wm" href="#top"><span class="dot"></span>Tyler <span class="thin">Ontiveros</span> <span style="font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--green); border: 1px solid var(--green); padding: 2px 8px; border-radius: 20px; margin-left: 8px;">Independent</span></a>
     <div class="nav-links">
       <a href="#services">Services</a>
       <a href="#how">How it works</a>
@@ -556,7 +547,5 @@
     </div>
   </div>
 </footer>
-
-<a class="idx-back" href="design/"><span class="pdot"></span>Design system index</a>
 
 </body></html>
